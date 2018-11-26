@@ -12,7 +12,7 @@
             tools:layout="@layout/fragment_home">
 
         <action android:id="@+id/open_profile"
-                app:destination="@id/user_profile"
+                app:destination="@id/fragemtn_example"
                 app:enterAnim="@anim/slide_in_right"
                 app:exitAnim="@anim/slide_out_left"
                 app:popEnterAnim="@anim/slide_in_left"
@@ -36,5 +36,26 @@
             android:id="@+id/user_profile"
             android:label="Profile"
             tools:layout="@layout/activity_profile"/>
+
+    <fragment
+            android:id="@+id/fragemtn_example"
+            android:label="Example"
+            tools:layout="@layout/fragment_exanple"
+            android:name="com.w3engineers.jitpackbottomnav.fragment.ExampleFragment">
+
+        <action
+                android:id="@+id/open_fragment_example_second"
+                app:destination="@id/fragemtn_example2"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+
+    <fragment
+            android:id="@+id/fragemtn_example2"
+            android:label="Example2"
+            tools:layout="@layout/fragment_example2"
+            android:name="com.w3engineers.jitpackbottomnav.fragment.ExampleFragment2"/>
 
 </navigation>
