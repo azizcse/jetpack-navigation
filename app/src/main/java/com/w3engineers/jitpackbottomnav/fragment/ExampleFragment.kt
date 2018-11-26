@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.w3engineers.jitpackbottomnav.R
@@ -28,8 +29,14 @@ class ExampleFragment: Fragment(), View.OnClickListener {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_exanple, container, false)
 
+        val name = arguments?.get("name") as String
+
+
         openButton = view.findViewById(R.id.open_fragment_example2)
         openButton.setOnClickListener(this)
+
+        Toast.makeText(activity, name, Toast.LENGTH_LONG).show()
+
         return view
     }
 

@@ -16,7 +16,7 @@
                 app:enterAnim="@anim/slide_in_right"
                 app:exitAnim="@anim/slide_out_left"
                 app:popEnterAnim="@anim/slide_in_left"
-                app:popExitAnim="@anim/slide_out_right" />
+                app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
 
     <fragment
@@ -39,7 +39,7 @@
 
     <fragment
             android:id="@+id/fragemtn_example"
-            android:label="Example"
+            android:label="Profile"
             tools:layout="@layout/fragment_exanple"
             android:name="com.w3engineers.jitpackbottomnav.fragment.ExampleFragment">
 
@@ -54,8 +54,13 @@
 
     <fragment
             android:id="@+id/fragemtn_example2"
-            android:label="Example2"
+            android:label="Profile image"
             tools:layout="@layout/fragment_example2"
-            android:name="com.w3engineers.jitpackbottomnav.fragment.ExampleFragment2"/>
+            android:name="com.w3engineers.jitpackbottomnav.fragment.ExampleFragment2">
+        <argument
+                android:name="plantId"
+                app:argType="string"
+                android:defaultValue="Hello"/>
+    </fragment>
 
 </navigation>

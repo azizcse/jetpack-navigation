@@ -39,14 +39,16 @@ class HomeFragment : Fragment(), View.OnClickListener {
     }
 
     override fun onClick(view: View?) {
-         val options = NavOptions.Builder()
+        /* val options = NavOptions.Builder()
              .setEnterAnim(R.anim.slide_in_right)
              .setExitAnim(R.anim.slide_out_left)
              .setPopEnterAnim(R.anim.slide_in_left)
              .setPopExitAnim(R.anim.slide_out_right)
-             .build()
+             .build()*/
 
-         Navigation.findNavController(view!!).navigate(R.id.open_profile)
+        val bundle = Bundle()
+        bundle.putString("name", "User profile")
+        Navigation.findNavController(view!!).navigate(R.id.open_profile, bundle)
         //val url = "http://192.168.2.57:8000/telemesh/survey/?format=api
     }
 }
