@@ -1,6 +1,15 @@
-# jitpack-View navigation
+# Jetpack-View navigation
 
-Manage you project by a single Activity, It makes view navigation smooth and easy
+## Features
+- Manage project with single Activity
+
+- Bottom navigation
+
+- Data passing between activity and fragmetn
+
+- Activity back button handle
+
+- Less code better performance
 
 
 ![Alt Text](https://github.com/azizcse/jitpack-navigation/blob/master/img/jetpack_view_navigation.gif)
