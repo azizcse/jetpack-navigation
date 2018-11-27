@@ -16,4 +16,4 @@
 - Toolbar manipulation so easy
 
 
-![Alt Text](https://github.com/azizcse/jitpack-navigation/blob/master/img/jitpack_navigation.gif)
+![Alt Text](https://github.com/azizcse/jitpack-navigation/blob/master/img/ezgif.com-crop.gif)
