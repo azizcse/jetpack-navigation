@@ -12,4 +12,4 @@
 - Less code better performance
 
 
-![Alt Text](https://github.com/azizcse/jitpack-navigation/blob/master/img/jetpack_view_navigation.gif)
+![Alt Text](https://github.com/azizcse/jitpack-navigation/blob/master/img/jitpack_navigation.gif)
