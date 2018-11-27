@@ -1,5 +1,7 @@
 package com.w3engineers.jitpackbottomnav
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -14,6 +16,11 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import android.view.animation.AnimationUtils.loadAnimation
+import com.w3engineers.jitpackbottomnav.util.AnimUtil
+
 
 class MainActivity : AppCompatActivity(), NavController.OnNavigatedListener {
 
@@ -55,9 +62,9 @@ class MainActivity : AppCompatActivity(), NavController.OnNavigatedListener {
 
     private fun toggleBottomView(needToShow: Boolean) {
         if(needToShow){
-            navigation.visibility = View.VISIBLE
+            AnimUtil.slideUp(this,navigation)
         }else{
-            navigation.visibility = View.GONE
+            AnimUtil.slideDown(this,navigation)
         }
     }
 
