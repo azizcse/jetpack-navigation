@@ -1,24 +1,12 @@
 package com.w3engineers.jitpackbottomnav
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.MenuItem
-import android.view.View
-import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
-import androidx.navigation.NavDirections
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
-import android.view.animation.AnimationUtils.loadAnimation
 import com.w3engineers.jitpackbottomnav.util.AnimUtil
 
 
