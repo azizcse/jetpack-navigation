@@ -41,7 +41,7 @@
             android:id="@+id/fragemtn_example"
             android:label="Profile"
             tools:layout="@layout/fragment_exanple"
-            android:name="com.w3engineers.jitpackbottomnav.fragment.ExampleFragment">
+            android:name="com.w3engineers.jitpackbottomnav.fragment.ProfileFragment">
 
         <action
                 android:id="@+id/open_fragment_example_second"
@@ -56,7 +56,7 @@
             android:id="@+id/fragemtn_example2"
             android:label="Profile image"
             tools:layout="@layout/fragment_example2"
-            android:name="com.w3engineers.jitpackbottomnav.fragment.ExampleFragment2">
+            android:name="com.w3engineers.jitpackbottomnav.fragment.ProfileImageFragment">
         <argument
                 android:name="plantId"
                 app:argType="string"
