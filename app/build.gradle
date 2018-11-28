@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
-
+apply plugin: 'io.objectbox'
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -28,6 +28,13 @@ dependencies {
     implementation "android.arch.navigation:navigation-fragment-ktx:1.0.0-alpha07"
     implementation "android.arch.navigation:navigation-ui-ktx:1.0.0-alpha07"
 
+    //room
+    //kapt "androidx.room:room-compiler:2.0.0-rc01"
+    //implementation "androidx.room:room-runtime:2.0.0-rc01"
+
+    //lifecycle
+    implementation "androidx.lifecycle:lifecycle-extensions:2.0.0-rc01"
+
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'com.google.android.material:material:1.1.0-alpha01'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
@@ -37,4 +44,12 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
     implementation 'com.android.volley:volley:1.1.0'
+}
+
+//BOX
+
+dependencies{
+    implementation "io.objectbox:objectbox-android:$objectboxVersion"
+    implementation "io.objectbox:objectbox-kotlin:$objectboxVersion"
+    kapt "io.objectbox:objectbox-processor:$objectboxVersion"
 }
