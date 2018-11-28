@@ -12,7 +12,7 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        boxStore = MyObjectBox.builder().androidContext(App.this).build();
+        //boxStore = MyObjectBox.builder().androidContext(App.this).build();
     }
 
     public BoxStore getBoxStore() {
