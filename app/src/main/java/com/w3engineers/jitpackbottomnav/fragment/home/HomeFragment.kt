@@ -1,4 +1,4 @@
-package com.w3engineers.jitpackbottomnav.fragment
+package com.w3engineers.jitpackbottomnav.fragment.home
 
 import android.os.Bundle
 import android.util.Log
