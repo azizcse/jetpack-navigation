@@ -1,21 +1,19 @@
 package com.w3engineers.jitpackbottomnav;
 
 import android.app.Application;
-import io.objectbox.BoxStore;
+import android.content.Context;
 
 public class App extends Application {
-
-    public static final String TAG = "Relations";
-
-    private BoxStore boxStore;
-
+    private static Context context;
     @Override
     public void onCreate() {
         super.onCreate();
-        //boxStore = MyObjectBox.builder().androidContext(App.this).build();
+        context = getApplicationContext();
     }
 
-    public BoxStore getBoxStore() {
-        return boxStore;
+    public Context getContext(){
+        return context;
     }
+
+
 }

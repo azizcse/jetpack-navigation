@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'io.objectbox'
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -44,12 +44,4 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
     implementation 'com.android.volley:volley:1.1.0'
-}
-
-//BOX
-
-dependencies{
-    implementation "io.objectbox:objectbox-android:$objectboxVersion"
-    implementation "io.objectbox:objectbox-kotlin:$objectboxVersion"
-    kapt "io.objectbox:objectbox-processor:$objectboxVersion"
 }
