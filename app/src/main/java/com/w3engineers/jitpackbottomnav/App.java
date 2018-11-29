@@ -15,10 +15,10 @@ public class App extends Application {
         boxStore = MyObjectBox.builder().androidContext(this).build();
     }
 
-    public Context getContext(){
+    public static Context getContext(){
         return context;
     }
-    public BoxStore getBoxStore(){
+    public static BoxStore getBoxStore(){
         return boxStore;
     }
 

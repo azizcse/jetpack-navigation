@@ -6,13 +6,19 @@ import android.view.*
 import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.core.kbasekit.ui.base.ItemClickListener
 import com.w3engineers.jitpackbottomnav.R
+import com.w3engineers.jitpackbottomnav.data.model.User
 
 
 /*
@@ -28,9 +34,13 @@ import com.w3engineers.jitpackbottomnav.R
 *  ****************************************************************************
 */
 
-class HomeFragment : Fragment(), View.OnClickListener {
-    lateinit var button: Button
+class HomeFragment : Fragment(), View.OnClickListener, ItemClickListener<User> {
 
+
+    lateinit var button: Button
+    lateinit var homeViewModel: HomeViewModel
+    lateinit var recyclerVuew: RecyclerView
+    lateinit var userAdapter: UserAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -38,14 +48,38 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
-        button = view.findViewById(R.id.open_profile_page);
+        button = view.findViewById(R.id.open_profile_page)
+        recyclerVuew = view.findViewById(R.id.user_rv)
+        userAdapter = UserAdapter()
+        recyclerVuew.adapter = userAdapter
+        recyclerVuew.layoutManager = LinearLayoutManager(activity)
+        userAdapter.setClickLisener(this)
         button.setOnClickListener(this)
+        homeViewModel = getViewModel()
+        loadData()
         return view
     }
 
+    fun loadData() {
+        homeViewModel.getUserLiveData().observe(activity!!,
+            Observer<List<User>> {
+                Log.e("Navigation", "User list =" + it.size)
+                userAdapter.addItems(it)
+            })
+    }
+
+
+    fun getViewModel(): HomeViewModel {
+        return ViewModelProviders.of(activity!!).get(HomeViewModel::class.java)
+    }
+
     override fun onClick(view: View?) {
+        homeViewModel.saveUser("Name " + System.currentTimeMillis())
+    }
+
+    override fun onItemClick(view: View, item: User) {
         val bundle = Bundle()
-        bundle.putString("name", "User profile")
+        bundle.putString("name", item.userName)
         Navigation.findNavController(view!!).navigate(R.id.open_profile, bundle)
     }
 
@@ -57,10 +91,11 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when (item?.itemId) {
-            R.id.home_menu->{
-                Toast.makeText(activity,"Send menu", Toast.LENGTH_SHORT).show()
+            R.id.home_menu -> {
+                Toast.makeText(activity, "Send menu", Toast.LENGTH_SHORT).show()
                 return true
-            } else -> super.onOptionsItemSelected(item)
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 }
