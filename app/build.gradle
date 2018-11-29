@@ -44,4 +44,6 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
     implementation 'com.android.volley:volley:1.1.0'
+    //anko
+    implementation "org.jetbrains.anko:anko-commons:0.10.8"
 }
