@@ -1,11 +1,11 @@
 package org.workfort.base.ui.base
 
-import android.databinding.DataBindingUtil
-import android.databinding.ViewDataBinding
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.Toolbar
 import android.view.*
+import androidx.appcompat.widget.Toolbar
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.Fragment
 import java.lang.RuntimeException
 
 
