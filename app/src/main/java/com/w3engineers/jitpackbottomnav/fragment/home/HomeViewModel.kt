@@ -18,7 +18,6 @@ class HomeViewModel : ViewModel() {
 
     val userBox: Box<User> = App.getBoxStore().boxFor(User::class.java)
 
-    lateinit var userLiveDataPaged :LiveData<PagedList<User>>
 
     fun getPagedUserLiveData(): LiveData<PagedList<User>>{
         val query = userBox.query().order(User_.userName).build()

@@ -39,9 +39,9 @@
 
     <fragment
             android:id="@+id/fragemtn_example"
-            android:label="Profile"
-            tools:layout="@layout/fragment_exanple"
-            android:name="com.w3engineers.jitpackbottomnav.fragment.ProfileFragment">
+            android:label="Chat"
+            tools:layout="@layout/fragment_chat"
+            android:name="com.w3engineers.jitpackbottomnav.fragment.chat.ChatFragment">
 
         <action
                 android:id="@+id/open_fragment_example_second"

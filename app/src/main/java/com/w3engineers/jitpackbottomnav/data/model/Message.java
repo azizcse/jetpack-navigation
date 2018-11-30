@@ -20,9 +20,12 @@ import io.objectbox.relation.ToOne;
 @Entity
 public class Message {
     @Id
-    public long messageIndex = 0;
+    public long id = 0;
     public String messageId;
+    public String friendsId;
     public String message;
+    public long time;
+    public boolean incoming;
 
     public ToOne<User> user;
 }

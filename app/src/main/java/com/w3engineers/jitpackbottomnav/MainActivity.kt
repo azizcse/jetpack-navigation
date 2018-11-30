@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity(), NavController.OnNavigatedListener {
     override fun onNavigated(controller: NavController, destination: NavDestination) {
         val title = destination.label
         supportActionBar!!.title = title
-        if(title!!.equals("Profile") || title!!.equals("Profile image")){
+        if(title!!.equals("Chat") || title!!.equals("Profile image")){
             toggleBottomView(false)
             supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         }else{

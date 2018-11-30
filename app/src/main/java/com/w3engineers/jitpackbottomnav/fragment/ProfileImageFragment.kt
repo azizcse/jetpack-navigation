@@ -5,7 +5,7 @@ import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.w3engineers.jitpackbottomnav.R
-import kotlinx.android.synthetic.main.fragment_exanple.view.*
+import kotlinx.android.synthetic.main.fragment_chat.view.*
 
 
 /*

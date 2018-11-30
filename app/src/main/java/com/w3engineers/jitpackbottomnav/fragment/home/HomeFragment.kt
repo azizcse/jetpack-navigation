@@ -95,7 +95,7 @@ class HomeFragment : Fragment(), View.OnClickListener, ItemClickListener<User> {
             }
             else -> {
                 val bundle = Bundle()
-                bundle.putString("name", item.userName)
+                bundle.putParcelable("user", item)
                 Navigation.findNavController(view!!).navigate(R.id.open_profile, bundle)
             }
         }

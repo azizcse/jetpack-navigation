@@ -1,15 +1,17 @@
-package com.w3engineers.jitpackbottomnav.fragment
+package com.w3engineers.jitpackbottomnav.fragment.chat
 
-import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.view.*
 import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.Toast
-import androidx.core.app.ShareCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.RecyclerView
 import com.w3engineers.jitpackbottomnav.R
+import com.w3engineers.jitpackbottomnav.data.model.User
 
 
 /*
@@ -25,8 +27,12 @@ import com.w3engineers.jitpackbottomnav.R
 *  ****************************************************************************
 */
 
-class ProfileFragment: Fragment(), View.OnClickListener {
-    lateinit var openButton : Button
+class ChatFragment : Fragment(), View.OnClickListener {
+
+    lateinit var sendButton : ImageButton
+    lateinit var inputText : EditText
+    lateinit var chatViewModel: ChatViewModel
+    lateinit var recyclerView : RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,21 +40,27 @@ class ProfileFragment: Fragment(), View.OnClickListener {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_exanple, container, false)
+        val view = inflater.inflate(R.layout.fragment_chat, container, false)
+        inputText = view.findViewById(R.id.edittext_message_input)
+        sendButton = view.findViewById(R.id.image_button_send)
+        recyclerView = view.findViewById(R.id.recycler_view_message)
+        chatViewModel = getViewModel()
 
-        val name = arguments?.get("name") as String
-
-
-        openButton = view.findViewById(R.id.open_fragment_example2)
-        openButton.setOnClickListener(this)
-
-        Toast.makeText(activity, name, Toast.LENGTH_LONG).show()
+        val name = arguments?.get("user") as User
 
         return view
     }
 
+    fun getViewModel(): ChatViewModel{
+        return ViewModelProviders.of(activity!!).get(ChatViewModel::class.java)
+    }
+
+
+
+
+
     override fun onClick(p0: View?) {
-        Navigation.findNavController(view!!).navigate(R.id.open_fragment_example_second)
+        //Navigation.findNavController(view!!).navigate(R.id.open_fragment_example_second)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -58,14 +70,11 @@ class ProfileFragment: Fragment(), View.OnClickListener {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when (item?.itemId) {
-            R.id.serch_menu -> {
-                Toast.makeText(activity,"Search menu", Toast.LENGTH_SHORT).show()
+            R.id.delete_menu -> {
+                Toast.makeText(activity, "Delete menu", Toast.LENGTH_SHORT).show()
                 return true
             }
-            R.id.send_menu->{
-                Toast.makeText(activity,"Send menu", Toast.LENGTH_SHORT).show()
-                return true
-            } else -> super.onOptionsItemSelected(item)
+            else -> super.onOptionsItemSelected(item)
         }
     }
 

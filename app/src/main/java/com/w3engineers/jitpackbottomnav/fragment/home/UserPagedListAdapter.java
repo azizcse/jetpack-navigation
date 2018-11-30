@@ -34,7 +34,8 @@ import org.jetbrains.annotations.NotNull;
 public class UserPagedListAdapter extends PagedListAdapter<User, UserPagedListAdapter.UserViewHolder> {
     private Context context;
     private static ItemClickListener itemClickListener;
-    public UserPagedListAdapter(Context context, ItemClickListener itemClickListener){
+
+    public UserPagedListAdapter(Context context, ItemClickListener itemClickListener) {
         super(DIFF_CALLBACK);
         this.context = context;
         this.itemClickListener = itemClickListener;
@@ -50,15 +51,16 @@ public class UserPagedListAdapter extends PagedListAdapter<User, UserPagedListAd
     @Override
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
         User user = getItem(position);
-        if(user != null) {
+        if (user != null) {
             holder.bind(user);
         }
     }
 
 
-    public  class UserViewHolder extends  RecyclerView.ViewHolder implements View.OnClickListener{
+    public class UserViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView name, id;
         Button deleteButton;
+
         public UserViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.user_name);
@@ -69,7 +71,7 @@ public class UserPagedListAdapter extends PagedListAdapter<User, UserPagedListAd
             id.setOnClickListener(this);
         }
 
-        void bind(User user){
+        void bind(User user) {
             name.setText(user.userName);
             id.setText(user.userId);
         }
@@ -83,22 +85,13 @@ public class UserPagedListAdapter extends PagedListAdapter<User, UserPagedListAd
     private static final DiffUtil.ItemCallback<User> DIFF_CALLBACK = new DiffUtil.ItemCallback<User>() {
         @Override
         public boolean areItemsTheSame(User oldItem, User newItem) {
-            if(oldItem.id == newItem.id){
-                Log.e("Dive_check", "areItemsTheSame true");
-                return true;
-            }
-            Log.e("Dive_check", "areItemsTheSame false");
-            return false;
+            return oldItem.id == newItem.id;
+
         }
 
         @Override
         public boolean areContentsTheSame(User oldItem, User newItem) {
-            if(oldItem == newItem){
-                Log.e("Dive_check", "areContentsTheSame true");
-                return true;
-            }
-            Log.e("Dive_check", "areContentsTheSame false");
-            return false;
+            return oldItem == newItem;
         }
     };
 }
