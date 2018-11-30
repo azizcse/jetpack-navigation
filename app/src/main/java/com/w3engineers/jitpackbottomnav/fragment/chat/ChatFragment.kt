@@ -33,6 +33,7 @@ class ChatFragment : Fragment(), View.OnClickListener {
     lateinit var inputText : EditText
     lateinit var chatViewModel: ChatViewModel
     lateinit var recyclerView : RecyclerView
+    lateinit var chatAdapter : ChatAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +45,8 @@ class ChatFragment : Fragment(), View.OnClickListener {
         inputText = view.findViewById(R.id.edittext_message_input)
         sendButton = view.findViewById(R.id.image_button_send)
         recyclerView = view.findViewById(R.id.recycler_view_message)
+        chatAdapter = ChatAdapter(activity)
+
         chatViewModel = getViewModel()
 
         val name = arguments?.get("user") as User

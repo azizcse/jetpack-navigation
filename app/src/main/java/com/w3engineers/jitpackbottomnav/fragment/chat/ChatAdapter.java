@@ -24,7 +24,6 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 import com.w3engineers.jitpackbottomnav.R;
 import com.w3engineers.jitpackbottomnav.data.model.Message;
-import com.w3engineers.jitpackbottomnav.data.model.User;
 
 public class ChatAdapter extends PagedListAdapter<Message, RecyclerView.ViewHolder> {
     private final int TEXT_IN = 1;
