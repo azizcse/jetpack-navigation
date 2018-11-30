@@ -10,16 +10,13 @@ import java.util.*
 
 class HomeViewModel : ViewModel() {
 
-    private lateinit var userLiveData: ObjectBoxLiveData<User>
     val userBox: Box<User> = App.getBoxStore().boxFor(User::class.java)
 
     fun getUserLiveData(): ObjectBoxLiveData<User> {
-         userLiveData = ObjectBoxLiveData<User>(userBox.query().build())
-        return userLiveData
+        return ObjectBoxLiveData<User>(userBox.query().build())
     }
 
     fun saveUser(name : String){
-        Log.e("Navigation", "Save  called")
         val userId = UUID.randomUUID().toString()
         val user = User()
         user.userId = userId

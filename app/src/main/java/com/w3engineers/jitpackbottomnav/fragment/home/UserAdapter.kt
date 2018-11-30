@@ -13,7 +13,7 @@ import com.w3engineers.jitpackbottomnav.databinding.ItemUserBinding
 class UserAdapter : BaseAdapter<User>() {
 
     override fun isEqual(leftItem: User, rightItem: User): Boolean {
-        return false
+        return leftItem.userId.equals(rightItem.userId)
     }
 
     override fun newViewHolder(parent: ViewGroup?, viewType: Int): BaseViewHolder<User> {
