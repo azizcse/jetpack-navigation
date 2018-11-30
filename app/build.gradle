@@ -40,6 +40,10 @@ dependencies {
     //lifecycle
     implementation "androidx.lifecycle:lifecycle-extensions:2.0.0-rc01"
 
+    //Paging
+    implementation "androidx.paging:paging-common:2.0.0-rc01"
+    implementation "androidx.paging:paging-runtime:2.0.0-rc01"
+
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'com.google.android.material:material:1.1.0-alpha01'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'

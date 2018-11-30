@@ -27,9 +27,15 @@ open abstract class BaseAdapter<T> : RecyclerView.Adapter<BaseViewHolder<T>>() {
         return mItemList.size
     }
 
-    fun addItem(item: T) {
-        mItemList.add(item)
-        notifyItemInserted(mItemList.size - 1)
+    fun addItem(item: T): Int {
+        val tItem = findItem(item)
+
+        if (tItem == null) {
+            mItemList.add(item)
+            notifyItemInserted(mItemList.size - 1)
+            return mItemList.size - 1
+        }
+        return updateItem(item, tItem)
     }
 
     fun getItem(pos: Int): T? {
@@ -38,8 +44,9 @@ open abstract class BaseAdapter<T> : RecyclerView.Adapter<BaseViewHolder<T>>() {
     }
 
     fun addItems(itemList: List<T>) {
-        mItemList.addAll(itemList)
-        notifyDataSetChanged()
+        for(item : T in itemList){
+         addItem(item)
+        }
     }
 
     fun removeItem(t: T) {
@@ -60,13 +67,16 @@ open abstract class BaseAdapter<T> : RecyclerView.Adapter<BaseViewHolder<T>>() {
         return mItemList
     }
 
-    fun updateItem(i: T) {
-        var item = findItem(i)
-        if (item != null) {
-            val index = mItemList.indexOf(item);
-            mItemList.set(index, i)
-            notifyItemChanged(index)
-        }
+    /**
+     * @param oldItem T type object
+     * @param newItem T type object
+     * @return int value: newItem position in list
+     */
+    fun updateItem(oldItem: T, newItem: T): Int {
+        val toIndex = mItemList.indexOf(newItem)
+        mItemList[toIndex] = oldItem
+        notifyItemChanged(toIndex)
+        return toIndex
     }
 
     fun findItem(item: T): T? {

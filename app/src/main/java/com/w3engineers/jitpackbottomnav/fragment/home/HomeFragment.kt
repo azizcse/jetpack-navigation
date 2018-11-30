@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
+import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
@@ -40,7 +41,9 @@ class HomeFragment : Fragment(), View.OnClickListener, ItemClickListener<User> {
     lateinit var button: Button
     lateinit var homeViewModel: HomeViewModel
     lateinit var recyclerVuew: RecyclerView
-    lateinit var userAdapter: UserAdapter
+    //    lateinit var userAdapter: UserAdapter
+    lateinit var pagedAdapter: UserPagedListAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -50,10 +53,17 @@ class HomeFragment : Fragment(), View.OnClickListener, ItemClickListener<User> {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
         button = view.findViewById(R.id.open_profile_page)
         recyclerVuew = view.findViewById(R.id.user_rv)
-        userAdapter = UserAdapter()
-        recyclerVuew.adapter = userAdapter
+        //userAdapter = UserAdapter()
+        //recyclerVuew.adapter = userAdapter
+
+        pagedAdapter = UserPagedListAdapter(activity, this)
+        recyclerVuew.adapter = pagedAdapter
+
         recyclerVuew.layoutManager = LinearLayoutManager(activity)
-        userAdapter.setClickLisener(this)
+        recyclerVuew.setHasFixedSize(true);
+
+        //userAdapter.setClickLisener(this)
+
         button.setOnClickListener(this)
         homeViewModel = getViewModel()
         loadData()
@@ -61,10 +71,11 @@ class HomeFragment : Fragment(), View.OnClickListener, ItemClickListener<User> {
     }
 
     fun loadData() {
-        homeViewModel.getUserLiveData().observe(activity!!,
-            Observer<List<User>> {
-                Log.e("Navigation", "User list =" + it.size)
-                userAdapter.addItems(it)
+        homeViewModel.getPagedUserLiveData().observe(activity!!,
+            Observer<PagedList<User>> {
+                Log.e("Item_list", "List size =" + it.size)
+                pagedAdapter.submitList(it)
+                recyclerVuew.smoothScrollToPosition(pagedAdapter.itemCount - 1)
             })
     }
 
@@ -78,9 +89,17 @@ class HomeFragment : Fragment(), View.OnClickListener, ItemClickListener<User> {
     }
 
     override fun onItemClick(view: View, item: User) {
-        val bundle = Bundle()
-        bundle.putString("name", item.userName)
-        Navigation.findNavController(view!!).navigate(R.id.open_profile, bundle)
+        when (view.id) {
+            R.id.delete_button -> {
+                homeViewModel.deleteItem(item)
+            }
+            else -> {
+                val bundle = Bundle()
+                bundle.putString("name", item.userName)
+                Navigation.findNavController(view!!).navigate(R.id.open_profile, bundle)
+            }
+        }
+
     }
 
 

@@ -1,25 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <LinearLayout
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:weightSum="2"
             android:layout_margin="10dp">
-
-        <TextView
-                android:id="@+id/user_name"
-                android:layout_width="match_parent"
+        <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="User name"/>
+                android:layout_weight="1.5"
+                android:orientation="vertical">
+            <TextView
+                    android:id="@+id/user_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="User name"/>
 
-        <TextView
-                android:id="@+id/user_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="User name"/>
-        <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/colorAccent"/>
+            <TextView
+                    android:id="@+id/user_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="User name"/>
+        </LinearLayout>
+
+        <Button
+                android:id="@+id/delete_button"
+                android:layout_width="50dp"
+                android:text="Delete"
+                android:layout_gravity="right"
+                android:layout_weight=".5"
+                android:layout_height="wrap_content"/>
     </LinearLayout>
 </layout>
