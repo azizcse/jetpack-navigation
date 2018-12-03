@@ -61,7 +61,9 @@ class HomeFragment : BaseFragment(), ItemClickListener<User> {
             Observer<PagedList<User>> {
                 Log.e("Item_list", "User List size =" + it.size)
                 pagedAdapter.submitList(it)
-                binding.userRv.smoothScrollToPosition(pagedAdapter.itemCount - 1)
+                if(it.size > 0) {
+                    binding.userRv.smoothScrollToPosition(pagedAdapter.itemCount - 1)
+                }
             })
     }
 
@@ -71,7 +73,7 @@ class HomeFragment : BaseFragment(), ItemClickListener<User> {
     }
 
     override fun onClick(view: View?) {
-        homeViewModel.saveUser("Name " + System.currentTimeMillis())
+        homeViewModel.saveUser("Click to chat " + System.currentTimeMillis())
     }
 
     override fun onItemClick(view: View, item: User) {
@@ -90,7 +92,7 @@ class HomeFragment : BaseFragment(), ItemClickListener<User> {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when (item?.itemId) {
             R.id.add_user_menu -> {
-                homeViewModel.saveUser("Name " + System.currentTimeMillis())
+                homeViewModel.saveUser("Click to chat " + System.currentTimeMillis())
                 return true
             }
             else -> super.onOptionsItemSelected(item)

@@ -45,6 +45,7 @@ class ChatViewModel : ViewModel() {
         message.messageId = UUID.randomUUID().toString()
         message.user.target = user
         message.incoming = true
+
         messageBox.put(message) // Incoming message insert
 
         val outMessage = Message()
@@ -53,6 +54,7 @@ class ChatViewModel : ViewModel() {
         outMessage.message = msg
         outMessage.friendsId = user.userId
         outMessage.user.target = user
+
         messageBox.put(outMessage) // Outgoing message insert
     }
 
