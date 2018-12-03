@@ -17,7 +17,7 @@
 ## Architecture
 - MVVM
 
-## unctionality
+## Functionality
 - Manage project with a single Activity
 
 - Smooth view navigation with Jetpack navigation system
