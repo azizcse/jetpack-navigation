@@ -13,8 +13,15 @@ import com.w3engineers.jitpackbottomnav.data.model.User_
 import io.objectbox.Box
 import io.objectbox.android.ObjectBoxDataSource
 import io.objectbox.android.ObjectBoxLiveData
+import io.objectbox.query.Query
 import io.objectbox.query.QueryBuilder
 import io.objectbox.query.QueryFilter
+import io.objectbox.rx.RxBoxStore
+import io.objectbox.rx.RxQuery
+import io.reactivex.Flowable
+import io.reactivex.Observable
+import io.reactivex.schedulers.Schedulers
+import java.util.function.Function
 
 
 /*
@@ -52,6 +59,11 @@ class HistoryViewModel : ViewModel() {
         }
 
         return history
+    }
+
+    fun rxuse(): Observable<List<User>> {
+        val query = userBox.query().build()
+        return RxQuery.observable(query).subscribeOn(Schedulers.io())
     }
 
 
