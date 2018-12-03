@@ -34,4 +34,4 @@
 
 - Data passing between activity and fragmetn
 
-![Alt Text](https://github.com/azizcse/jitpack-navigation/blob/master/img/ezgif.com-crop.gif)
+![Alt Text](https://github.com/azizcse/jitpack-navigation/blob/master/img/jetpack_navigation.gif)
