@@ -71,9 +71,9 @@ class HomeFragment : Fragment(), View.OnClickListener, ItemClickListener<User> {
     }
 
     fun loadData() {
-        homeViewModel.getPagedUserLiveData().observe(activity!!,
+        homeViewModel.getPagedUserLiveData().observe(this,
             Observer<PagedList<User>> {
-                Log.e("Item_list", "List size =" + it.size)
+                Log.e("Item_list", "User List size =" + it.size)
                 pagedAdapter.submitList(it)
                 recyclerVuew.smoothScrollToPosition(pagedAdapter.itemCount - 1)
             })
@@ -81,7 +81,7 @@ class HomeFragment : Fragment(), View.OnClickListener, ItemClickListener<User> {
 
 
     fun getViewModel(): HomeViewModel {
-        return ViewModelProviders.of(activity!!).get(HomeViewModel::class.java)
+        return ViewModelProviders.of(this).get(HomeViewModel::class.java)
     }
 
     override fun onClick(view: View?) {

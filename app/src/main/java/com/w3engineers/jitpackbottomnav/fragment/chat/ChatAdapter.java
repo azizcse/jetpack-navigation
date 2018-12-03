@@ -38,6 +38,8 @@ public class ChatAdapter extends PagedListAdapter<Message, RecyclerView.ViewHold
     @Override
     public int getItemViewType(int position) {
         Message item = getItem(position);
+        if (item == null)
+            return TEXT_OUT;
 
         if (item.incoming) {
             return TEXT_IN;
@@ -65,35 +67,38 @@ public class ChatAdapter extends PagedListAdapter<Message, RecyclerView.ViewHold
         int type = getItemViewType(position);
         Message item = getItem(position);
 
-        if(item == null) return;
+        if (item == null) return;
 
-        if(type == TEXT_IN){
-            ((TextInHolder)holder).bind(item);
-        }else {
-            ((TextOutHolder)holder).bind(item);
+        if (type == TEXT_IN) {
+            ((TextInHolder) holder).bind(item);
+        } else {
+            ((TextOutHolder) holder).bind(item);
         }
     }
 
 
     private class TextInHolder extends RecyclerView.ViewHolder {
         TextView message;
+
         public TextInHolder(@NonNull View itemView) {
             super(itemView);
             message = itemView.findViewById(R.id.text_view_message);
         }
 
-        void bind(Message msg){
+        void bind(Message msg) {
             message.setText(msg.message);
         }
     }
 
     private class TextOutHolder extends RecyclerView.ViewHolder {
         TextView message;
+
         public TextOutHolder(@NonNull View itemView) {
             super(itemView);
             message = itemView.findViewById(R.id.text_view_message);
         }
-        void bind(Message msg){
+
+        void bind(Message msg) {
             message.setText(msg.message);
         }
     }

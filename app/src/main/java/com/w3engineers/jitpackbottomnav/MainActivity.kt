@@ -2,6 +2,8 @@ package com.w3engineers.jitpackbottomnav
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.MenuItem
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
@@ -53,6 +55,27 @@ class MainActivity : AppCompatActivity(), NavController.OnNavigatedListener {
             AnimUtil.slideUp(this,navigation)
         }else{
             AnimUtil.slideDown(this,navigation)
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if(item!!.itemId == android.R.id.home){
+            popFragment()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        popFragment()
+    }
+
+
+    fun popFragment(){
+        val fragmentManager = supportFragmentManager.fragments
+        if(fragmentManager.size> 0){
+            Log.e("Item_list", "Pop fragments" )
+            //supportFragmentManager.popBackStack()
         }
     }
 

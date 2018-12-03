@@ -8,7 +8,6 @@ import com.w3engineers.jitpackbottomnav.App
 import com.w3engineers.jitpackbottomnav.data.model.Message
 import com.w3engineers.jitpackbottomnav.data.model.Message_
 import com.w3engineers.jitpackbottomnav.data.model.User
-import com.w3engineers.jitpackbottomnav.data.model.User_
 import io.objectbox.android.ObjectBoxDataSource
 import io.objectbox.query.QueryBuilder
 import java.util.*
@@ -36,7 +35,7 @@ class ChatViewModel : ViewModel() {
             .order(Message_.time, QueryBuilder.DESCENDING)
             .build()
 
-        return LivePagedListBuilder<Int, Message>( ObjectBoxDataSource.Factory<Message>(query),20).build()
+        return LivePagedListBuilder<Int, Message>( ObjectBoxDataSource.Factory<Message>(query),10).build()
     }
 
     fun saveMessage(msg : String, user : User){
@@ -44,6 +43,24 @@ class ChatViewModel : ViewModel() {
         message.friendsId = user.userId
         message.message = msg
         message.messageId = UUID.randomUUID().toString()
-        message.user.target
+        message.user.target = user
+        message.incoming = true
+        messageBox.put(message) // Incoming message insert
+
+        val outMessage = Message()
+        outMessage.messageId = UUID.randomUUID().toString()
+        outMessage.incoming = false
+        outMessage.message = msg
+        outMessage.friendsId = user.userId
+        outMessage.user.target = user
+        messageBox.put(outMessage) // Outgoing message insert
+    }
+
+    fun deleteAllMessage(user: User) {
+        messageBox.query()
+            .equal(Message_.friendsId, user.userId)
+            .build()
+            .remove()
+
     }
 }

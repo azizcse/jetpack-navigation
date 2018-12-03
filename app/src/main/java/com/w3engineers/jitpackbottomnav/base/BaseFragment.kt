@@ -24,7 +24,6 @@ import java.lang.RuntimeException
 
 abstract class BaseFragment : Fragment(), View.OnClickListener {
     abstract val getLayoutId: Int
-    abstract val toolbar: Toolbar
     abstract val getMenuId: Int
     private val DEFAULT_VALUE = 0
 
@@ -32,16 +31,24 @@ abstract class BaseFragment : Fragment(), View.OnClickListener {
 
     //abstract method
     abstract fun startView()
+
     abstract fun stopView()
 
-    fun getViewBinding():ViewDataBinding{
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (getMenuId > DEFAULT_VALUE)
+            setHasOptionsMenu(true)
+    }
+
+
+    fun getViewBinding(): ViewDataBinding {
         return viewBinding
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        if(getLayoutId > DEFAULT_VALUE){
+        if (getLayoutId > DEFAULT_VALUE) {
             viewBinding = DataBindingUtil.inflate(inflater, getLayoutId, container, false)
-        }else throw RuntimeException("Please set layout with databinding")
+        } else throw RuntimeException("Please set layout with databinding")
 
         return viewBinding.root
     }
@@ -57,8 +64,8 @@ abstract class BaseFragment : Fragment(), View.OnClickListener {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        if(getMenuId > DEFAULT_VALUE){
-            inflater!!.inflate(getMenuId,menu)
+        if (getMenuId > DEFAULT_VALUE) {
+            inflater!!.inflate(getMenuId, menu)
         }
         super.onCreateOptionsMenu(menu, inflater)
     }
