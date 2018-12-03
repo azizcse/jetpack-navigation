@@ -10,10 +10,11 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.w3engineers.jitpackbottomnav.util.AnimUtil
+import android.content.Context
+import android.view.inputmethod.InputMethodManager
 
 
 class MainActivity : AppCompatActivity(), NavController.OnNavigatedListener {
-
 
     private lateinit var navController: NavController
     private lateinit var navigation: BottomNavigationView
@@ -49,13 +50,13 @@ class MainActivity : AppCompatActivity(), NavController.OnNavigatedListener {
         }
     }
 
-
     private fun toggleBottomView(needToShow: Boolean) {
         if(needToShow){
             AnimUtil.slideUp(this,navigation)
         }else{
             AnimUtil.slideDown(this,navigation)
         }
+        hideKeyboard()
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -76,6 +77,13 @@ class MainActivity : AppCompatActivity(), NavController.OnNavigatedListener {
         if(fragmentManager.size> 0){
             Log.e("Item_list", "Pop fragments" )
             //supportFragmentManager.popBackStack()
+        }
+    }
+
+    fun hideKeyboard() {
+        val inputManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        if (currentFocus != null) {
+            inputManager.hideSoftInputFromWindow(currentFocus.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
         }
     }
 
