@@ -42,13 +42,18 @@ class HomeFragment : BaseFragment(), ItemClickListener<User> {
 
     override fun startView() {
         binding = getViewBinding() as FragmentHomeBinding
+        homeViewModel = getViewModel()
+        initRecyclerView()
+        loadData()
+    }
+
+
+    fun initRecyclerView() {
         pagedAdapter = UserPagedListAdapter(activity, this)
         binding.userRv.adapter = pagedAdapter
         binding.userRv.layoutManager = LinearLayoutManager(activity)
         binding.userRv.setHasFixedSize(true)
         binding.openProfilePage.setOnClickListener(this)
-        homeViewModel = getViewModel()
-        loadData()
     }
 
     fun loadData() {
