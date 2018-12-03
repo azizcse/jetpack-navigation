@@ -89,8 +89,8 @@ class HomeFragment : BaseFragment(), ItemClickListener<User> {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when (item?.itemId) {
-            R.id.home_menu -> {
-                Toast.makeText(activity, "Send menu", Toast.LENGTH_SHORT).show()
+            R.id.add_user_menu -> {
+                homeViewModel.saveUser("Name " + System.currentTimeMillis())
                 return true
             }
             else -> super.onOptionsItemSelected(item)
