@@ -32,7 +32,7 @@ class ChatViewModel : ViewModel() {
     fun getMessagePagedLiveData(user : User):LiveData<PagedList<Message>>{
         val query = messageBox.query()
             .equal(Message_.friendsId, user.userId)
-            .order(Message_.time, QueryBuilder.DESCENDING)
+            .order(Message_.time)
             .build()
 
         return LivePagedListBuilder<Int, Message>( ObjectBoxDataSource.Factory<Message>(query),10).build()
@@ -45,6 +45,7 @@ class ChatViewModel : ViewModel() {
         message.messageId = UUID.randomUUID().toString()
         message.user.target = user
         message.incoming = true
+        message.time = System.currentTimeMillis()
 
         messageBox.put(message) // Incoming message insert
 
@@ -54,6 +55,7 @@ class ChatViewModel : ViewModel() {
         outMessage.message = msg
         outMessage.friendsId = user.userId
         outMessage.user.target = user
+        outMessage.time = System.currentTimeMillis()
 
         messageBox.put(outMessage) // Outgoing message insert
     }

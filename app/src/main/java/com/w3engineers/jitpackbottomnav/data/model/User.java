@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import io.objectbox.annotation.Entity;
 import io.objectbox.annotation.Id;
+import io.objectbox.annotation.Transient;
 import io.objectbox.relation.ToMany;
 
 /*
@@ -24,6 +25,9 @@ public class User implements Parcelable {
     public long id;
     public String userName;
     public String userId;
+
+    @Transient
+    public String lastMessage;
 
     public User() {
     }

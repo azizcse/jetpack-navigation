@@ -21,7 +21,7 @@
 
     <fragment
             android:id="@+id/message_fragment"
-            android:name="com.w3engineers.jitpackbottomnav.fragment.MessageFragment"
+            android:name="com.w3engineers.jitpackbottomnav.fragment.history.MessageFragment"
             android:label="Message"
             tools:layout="@layout/fragment_home"/>
 

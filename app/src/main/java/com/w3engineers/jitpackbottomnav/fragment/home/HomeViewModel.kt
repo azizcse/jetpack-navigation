@@ -10,6 +10,8 @@ import io.objectbox.Box
 import io.objectbox.android.ObjectBoxLiveData
 import java.util.*
 import androidx.paging.LivePagedListBuilder
+import com.w3engineers.jitpackbottomnav.data.model.Message
+import com.w3engineers.jitpackbottomnav.data.model.Message_
 import com.w3engineers.jitpackbottomnav.data.model.User_
 import io.objectbox.android.ObjectBoxDataSource
 
@@ -17,7 +19,7 @@ import io.objectbox.android.ObjectBoxDataSource
 class HomeViewModel : ViewModel() {
 
     val userBox: Box<User> = App.getBoxStore().boxFor(User::class.java)
-
+    val messageBox = App.getBoxStore().boxFor(Message::class.java)
 
     fun getPagedUserLiveData(): LiveData<PagedList<User>>{
         val query = userBox.query().order(User_.userName).build()
