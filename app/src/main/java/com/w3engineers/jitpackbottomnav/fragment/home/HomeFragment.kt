@@ -61,9 +61,7 @@ class HomeFragment : BaseFragment(), ItemClickListener<User> {
             Observer<PagedList<User>> {
                 Log.e("Item_list", "User List size =" + it.size)
                 pagedAdapter.submitList(it)
-                if(it.size > 0) {
-                    binding.userRv.smoothScrollToPosition(pagedAdapter.itemCount - 1)
-                }
+
             })
     }
 
