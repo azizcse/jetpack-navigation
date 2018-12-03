@@ -3,23 +3,17 @@ package com.w3engineers.jitpackbottomnav.fragment.home
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.Button
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
 import com.core.kbasekit.ui.base.ItemClickListener
 import com.w3engineers.jitpackbottomnav.R
 import com.w3engineers.jitpackbottomnav.data.model.User
+import com.w3engineers.jitpackbottomnav.databinding.FragmentHomeBinding
+import org.workfort.base.ui.base.BaseFragment
 
 
 /*
@@ -35,39 +29,26 @@ import com.w3engineers.jitpackbottomnav.data.model.User
 *  ****************************************************************************
 */
 
-class HomeFragment : Fragment(), View.OnClickListener, ItemClickListener<User> {
+class HomeFragment : BaseFragment(), ItemClickListener<User> {
 
-
-    lateinit var button: Button
+    lateinit var binding: FragmentHomeBinding
     lateinit var homeViewModel: HomeViewModel
-    lateinit var recyclerVuew: RecyclerView
-    //    lateinit var userAdapter: UserAdapter
     lateinit var pagedAdapter: UserPagedListAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
+    override val getLayoutId: Int
+        get() = R.layout.fragment_home
+    override val getMenuId: Int
+        get() = R.menu.menu_home
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_home, container, false)
-        button = view.findViewById(R.id.open_profile_page)
-        recyclerVuew = view.findViewById(R.id.user_rv)
-        //userAdapter = UserAdapter()
-        //recyclerVuew.adapter = userAdapter
-
+    override fun startView() {
+        binding = getViewBinding() as FragmentHomeBinding
         pagedAdapter = UserPagedListAdapter(activity, this)
-        recyclerVuew.adapter = pagedAdapter
-
-        recyclerVuew.layoutManager = LinearLayoutManager(activity)
-        recyclerVuew.setHasFixedSize(true);
-
-        //userAdapter.setClickLisener(this)
-
-        button.setOnClickListener(this)
+        binding.userRv.adapter = pagedAdapter
+        binding.userRv.layoutManager = LinearLayoutManager(activity)
+        binding.userRv.setHasFixedSize(true)
+        binding.openProfilePage.setOnClickListener(this)
         homeViewModel = getViewModel()
         loadData()
-        return view
     }
 
     fun loadData() {
@@ -75,7 +56,7 @@ class HomeFragment : Fragment(), View.OnClickListener, ItemClickListener<User> {
             Observer<PagedList<User>> {
                 Log.e("Item_list", "User List size =" + it.size)
                 pagedAdapter.submitList(it)
-                recyclerVuew.smoothScrollToPosition(pagedAdapter.itemCount - 1)
+                binding.userRv.smoothScrollToPosition(pagedAdapter.itemCount - 1)
             })
     }
 
@@ -99,13 +80,6 @@ class HomeFragment : Fragment(), View.OnClickListener, ItemClickListener<User> {
                 Navigation.findNavController(view!!).navigate(R.id.open_profile, bundle)
             }
         }
-
-    }
-
-
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater?.inflate(R.menu.menu_home, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -116,5 +90,9 @@ class HomeFragment : Fragment(), View.OnClickListener, ItemClickListener<User> {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun stopView() {
+
     }
 }

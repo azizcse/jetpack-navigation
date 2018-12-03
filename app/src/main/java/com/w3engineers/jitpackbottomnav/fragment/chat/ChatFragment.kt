@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.*
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -14,86 +15,69 @@ import androidx.recyclerview.widget.RecyclerView
 import com.w3engineers.jitpackbottomnav.R
 import com.w3engineers.jitpackbottomnav.data.model.Message
 import com.w3engineers.jitpackbottomnav.data.model.User
+import com.w3engineers.jitpackbottomnav.databinding.FragmentChatBinding
+import org.workfort.base.ui.base.BaseFragment
 
 
 /*
 *  ****************************************************************************
 *  * Created by : Md. Azizul Islam on 11/26/2018 at 3:52 PM.
 *  * Email : azizul@w3engineers.com
-*  * 
+*  *
 *  * Purpose:
 *  *
 *  * Last edited by : Md. Azizul Islam on 11/26/2018.
-*  * 
-*  * Last Reviewed by : <Reviewer Name> on <mm/dd/yy>  
+*  *
+*  * Last Reviewed by : <Reviewer Name> on <mm/dd/yy>
 *  ****************************************************************************
 */
 
-class ChatFragment : Fragment(), View.OnClickListener {
+class ChatFragment : BaseFragment() {
 
-    lateinit var sendButton : ImageButton
-    lateinit var inputText : EditText
+    lateinit var binding: FragmentChatBinding
+    lateinit var chatAdapter: ChatAdapter
+    lateinit var user: User
     lateinit var chatViewModel: ChatViewModel
-    lateinit var recyclerView : RecyclerView
-    lateinit var chatAdapter : ChatAdapter
-    lateinit var user : User
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
+    override val getLayoutId: Int
+        get() = R.layout.fragment_chat
+    override val getMenuId: Int
+        get() = R.menu.menu_profile
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_chat, container, false)
-        inputText = view.findViewById(R.id.edittext_message_input)
-        sendButton = view.findViewById(R.id.image_button_send)
-        recyclerView = view.findViewById(R.id.recycler_view_message)
+    override fun startView() {
+        binding = getViewBinding() as FragmentChatBinding
         chatAdapter = ChatAdapter(activity)
-        sendButton.setOnClickListener(this)
-        recyclerView.adapter = chatAdapter
-        recyclerView.layoutManager = LinearLayoutManager(activity)
-
+        binding.imageButtonSend.setOnClickListener(this)
+        binding.recyclerViewMessage.adapter = chatAdapter
+        binding.recyclerViewMessage.layoutManager = LinearLayoutManager(activity)
         chatViewModel = getViewModel()
-
         user = arguments?.get("user") as User
         loadData()
-        return view
     }
 
-    fun  getViewModel(): ChatViewModel{
+    fun getViewModel(): ChatViewModel {
         return ViewModelProviders.of(this).get(ChatViewModel::class.java)
     }
 
-    private fun loadData(){
+    private fun loadData() {
         chatViewModel.getMessagePagedLiveData(user).observe(this,
             Observer<PagedList<Message>> {
-            Log.e("Item_list", "Chat List size =" + it.size)
+                Log.e("Item_list", "Chat List size =" + it.size)
                 chatAdapter.submitList(it)
-
                 //recyclerView.scrollToPosition(chatAdapter.itemCount-1)
-        })
+            })
     }
-
-
-
 
 
     override fun onClick(p0: View?) {
         //Navigation.findNavController(view!!).navigate(R.id.open_fragment_example_second)
-        val value = inputText.text.toString().trim()
-
-        if(value.isEmpty()) return
-
+        val value = binding.edittextMessageInput.text.toString().trim()
+        if (value.isEmpty()) return
         chatViewModel.saveMessage(value, user)
-
-        inputText.setText("")
+        binding.edittextMessageInput.setText("")
 
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater?.inflate(R.menu.menu_profile, menu)
-    }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when (item?.itemId) {
@@ -105,5 +89,10 @@ class ChatFragment : Fragment(), View.OnClickListener {
             else -> super.onOptionsItemSelected(item)
         }
     }
+
+    override fun stopView() {
+
+    }
+
 
 }
