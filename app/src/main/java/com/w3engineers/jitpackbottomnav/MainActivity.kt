@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity(), NavController.OnNavigatedListener {
         val fragmentManager = supportFragmentManager.fragments
         if(fragmentManager.size> 0){
             Log.e("Item_list", "Pop fragments" )
-            supportFragmentManager.popBackStack()
+            //supportFragmentManager.popBackStack()
         }
     }
 

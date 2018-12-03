@@ -5,4 +5,9 @@
           android:icon="@drawable/ic_delete"
           android:title="Search"
           app:showAsAction="always"/>
+
+    <item android:id="@+id/profile_menu"
+          android:icon="@drawable/ic_person_normal"
+          android:title="Search"
+          app:showAsAction="always"/>
 </menu>

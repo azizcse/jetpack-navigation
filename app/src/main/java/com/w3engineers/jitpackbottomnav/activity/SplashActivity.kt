@@ -31,7 +31,7 @@ class SplashActivity : AppCompatActivity(){
     private fun gotoNextPage(){
         onUiThread(1000,{
             startActivity<MainActivity>()
-            overridePendingTransition(R.anim.slide_to_left, R.anim.slide_from_right)
+            overridePendingTransition(R.anim.slide_to_left, R.anim.slide_to_left)
             finish()
         })
     }
