@@ -1,0 +1,80 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:6782046765023506447",
+      "lastPropertyId": "4:843769299148439517",
+      "name": "User",
+      "properties": [
+        {
+          "id": "2:2024819379450375323",
+          "name": "userName"
+        },
+        {
+          "id": "3:9045760870682627764",
+          "name": "userId"
+        },
+        {
+          "id": "4:843769299148439517",
+          "name": "id"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:1254387822099593149",
+      "lastPropertyId": "8:8264988332312663326",
+      "name": "Message",
+      "properties": [
+        {
+          "id": "2:5727270600997788444",
+          "name": "messageId"
+        },
+        {
+          "id": "3:5581280538816359922",
+          "name": "message"
+        },
+        {
+          "id": "4:2482584687891186430",
+          "indexId": "1:7560792403599785378",
+          "name": "userId"
+        },
+        {
+          "id": "5:2730288429250850015",
+          "name": "friendsId"
+        },
+        {
+          "id": "6:2945737144775675129",
+          "name": "time"
+        },
+        {
+          "id": "7:7031262056403591596",
+          "name": "incoming"
+        },
+        {
+          "id": "8:8264988332312663326",
+          "name": "id"
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "2:1254387822099593149",
+  "lastIndexId": "1:7560792403599785378",
+  "lastRelationId": "1:6724191707256247078",
+  "lastSequenceId": "0:0",
+  "modelVersion": 4,
+  "modelVersionParserMinimum": 4,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [
+    689256191571174206,
+    538677320948800329
+  ],
+  "retiredRelationUids": [
+    6724191707256247078
+  ],
+  "version": 1
+}

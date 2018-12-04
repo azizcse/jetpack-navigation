@@ -59,4 +59,5 @@ dependencies {
     implementation "org.jetbrains.anko:anko-commons:0.10.8"
 
     implementation "io.objectbox:objectbox-rxjava:$objectboxVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$rx_android_version"
 }

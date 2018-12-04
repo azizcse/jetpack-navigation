@@ -11,17 +11,12 @@ import com.w3engineers.jitpackbottomnav.data.model.Message_
 import com.w3engineers.jitpackbottomnav.data.model.User
 import com.w3engineers.jitpackbottomnav.data.model.User_
 import io.objectbox.Box
-import io.objectbox.android.ObjectBoxDataSource
-import io.objectbox.android.ObjectBoxLiveData
-import io.objectbox.query.Query
 import io.objectbox.query.QueryBuilder
 import io.objectbox.query.QueryFilter
 import io.objectbox.rx.RxBoxStore
 import io.objectbox.rx.RxQuery
 import io.reactivex.Flowable
-import io.reactivex.Observable
-import io.reactivex.schedulers.Schedulers
-import java.util.function.Function
+import io.reactivex.functions.Function
 
 
 /*
@@ -40,19 +35,19 @@ import java.util.function.Function
 class HistoryViewModel : ViewModel() {
     val userBox: Box<User> = App.getBoxStore().boxFor(User::class.java)
     val messageBox = App.getBoxStore().boxFor(Message::class.java)
-   // val message = messageBox.query().equal(Message_.friendsId, it.userId).build().find(1, 1)
+    // val message = messageBox.query().equal(Message_.friendsId, it.userId).build().find(1, 1)
 
-    fun getUserLiveData():List<User> {
-       val  users = userBox.query().build().find()
+    fun getUserLiveData(): List<User> {
+        val users = userBox.query().build().find()
         val history = ArrayList<User>()
-        for (user : User in users){
+        for (user: User in users) {
             val messsage = messageBox.query()
                 .equal(Message_.friendsId, user.userId)
                 .order(Message_.time, QueryBuilder.DESCENDING)
                 .build()
-                .find(1,1)
+                .find(1, 1)
 
-            if(messsage != null){
+            if (messsage != null) {
                 user.lastMessage = messsage.get(0).message
                 history.add(user)
             }
@@ -61,11 +56,24 @@ class HistoryViewModel : ViewModel() {
         return history
     }
 
-    fun rxuse(): Observable<List<User>> {
+    fun rxuse(): Flowable<User> {
         val query = userBox.query().build()
-        return RxQuery.observable(query).subscribeOn(Schedulers.io())
-    }
+        return RxQuery.flowableOneByOne(query).map(object :Function<User, User>{
+            override fun apply(user: User): User {
+                val messsage = messageBox.query()
+                    .equal(Message_.friendsId, user.userId)
+                    .order(Message_.time, QueryBuilder.DESCENDING)
+                    .build()
+                    .find(1, 1)
+                if (messsage != null && messsage.size > 0) {
+                    user.lastMessage = messsage.get(0).message
 
+                }
+                return user
+            }
+
+        })
+    }
 
 }
 
