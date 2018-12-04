@@ -87,7 +87,7 @@ class ChatFragment : BaseFragment() {
                 return true
             }
             R.id.profile_menu->{
-                Navigation.findNavController(view!!).navigate(R.id.open_fragment_example_second)
+                Navigation.findNavController(view!!).navigate(R.id.open_fragment_profile)
                 return true
             }
             else -> super.onOptionsItemSelected(item)

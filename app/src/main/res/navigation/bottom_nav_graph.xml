@@ -12,7 +12,7 @@
             tools:layout="@layout/fragment_home">
 
         <action android:id="@+id/open_profile"
-                app:destination="@id/fragemtn_example"
+                app:destination="@id/fragemtn_chat"
                 app:enterAnim="@anim/slide_in_right"
                 app:exitAnim="@anim/slide_out_left"
                 app:popEnterAnim="@anim/slide_in_left"
@@ -38,14 +38,14 @@
             tools:layout="@layout/activity_profile"/>
 
     <fragment
-            android:id="@+id/fragemtn_example"
+            android:id="@+id/fragemtn_chat"
             android:label="Chat"
             tools:layout="@layout/fragment_chat"
             android:name="com.w3engineers.jitpackbottomnav.fragment.chat.ChatFragment">
 
         <action
-                android:id="@+id/open_fragment_example_second"
-                app:destination="@id/fragemtn_example2"
+                android:id="@+id/open_fragment_profile"
+                app:destination="@id/fragemtn_profile"
                 app:enterAnim="@anim/slide_in_right"
                 app:exitAnim="@anim/slide_out_left"
                 app:popEnterAnim="@anim/slide_in_left"
@@ -53,9 +53,9 @@
     </fragment>
 
     <fragment
-            android:id="@+id/fragemtn_example2"
+            android:id="@+id/fragemtn_profile"
             android:label="Profile image"
-            tools:layout="@layout/fragment_example2"
+            tools:layout="@layout/fragment_profile"
             android:name="com.w3engineers.jitpackbottomnav.fragment.ProfileImageFragment">
         <argument
                 android:name="plantId"
