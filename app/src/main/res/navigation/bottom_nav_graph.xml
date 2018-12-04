@@ -12,7 +12,7 @@
             tools:layout="@layout/fragment_home">
 
         <action android:id="@+id/open_profile"
-                app:destination="@id/fragemtn_chat"
+                app:destination="@id/fragment_chat"
                 app:enterAnim="@anim/slide_in_right"
                 app:exitAnim="@anim/slide_out_left"
                 app:popEnterAnim="@anim/slide_in_left"
@@ -38,7 +38,7 @@
             tools:layout="@layout/activity_profile"/>
 
     <fragment
-            android:id="@+id/fragemtn_chat"
+            android:id="@+id/fragment_chat"
             android:label="Chat"
             tools:layout="@layout/fragment_chat"
             android:name="com.w3engineers.jitpackbottomnav.fragment.chat.ChatFragment">
