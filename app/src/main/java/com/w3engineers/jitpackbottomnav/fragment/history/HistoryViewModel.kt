@@ -47,7 +47,7 @@ class HistoryViewModel : ViewModel() {
                 .build()
                 .find(1, 1)
 
-            if (messsage != null) {
+            if (messsage != null && messsage.size > 0) {
                 user.lastMessage = messsage.get(0).message
                 history.add(user)
             }
