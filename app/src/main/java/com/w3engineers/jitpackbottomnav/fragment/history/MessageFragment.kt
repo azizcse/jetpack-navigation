@@ -31,6 +31,7 @@ class MessageFragment : BaseFragment() {
 
     override val getLayoutId: Int
         get() = R.layout.fragment_message
+
     override val getMenuId: Int
         get() = R.menu.menu_message
 

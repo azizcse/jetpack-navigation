@@ -1,19 +1,12 @@
 package com.w3engineers.jitpackbottomnav.fragment.history
 
-import android.util.Property
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import androidx.paging.LivePagedListBuilder
-import androidx.paging.PagedList
 import com.w3engineers.jitpackbottomnav.App
 import com.w3engineers.jitpackbottomnav.data.model.Message
 import com.w3engineers.jitpackbottomnav.data.model.Message_
 import com.w3engineers.jitpackbottomnav.data.model.User
-import com.w3engineers.jitpackbottomnav.data.model.User_
 import io.objectbox.Box
 import io.objectbox.query.QueryBuilder
-import io.objectbox.query.QueryFilter
-import io.objectbox.rx.RxBoxStore
 import io.objectbox.rx.RxQuery
 import io.reactivex.Flowable
 import io.reactivex.functions.Function
