@@ -31,7 +31,7 @@ class HistoryViewModel : ViewModel() {
     // val message = messageBox.query().equal(Message_.friendsId, it.userId).build().find(1, 1)
 
     fun getUserLiveData(): List<User> {
-        val users = userBox.query().build().find()
+        val users = userBox.all
         val history = ArrayList<User>()
         for (user: User in users) {
             val messsage = messageBox.query()
