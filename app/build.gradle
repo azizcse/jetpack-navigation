@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'io.objectbox'
+
 
 android {
     compileSdkVersion 28
@@ -60,4 +60,8 @@ dependencies {
 
     implementation "io.objectbox:objectbox-rxjava:$objectboxVersion"
     implementation "io.reactivex.rxjava2:rxandroid:$rx_android_version"
+    //debugImplementation "io.objectbox:objectbox-android-objectbrowser:$objectboxVersion"
+    debugImplementation "io.objectbox:objectbox-android-objectbrowser:$objectboxVersion"
+    releaseImplementation "io.objectbox:objectbox-android:$objectboxVersion"
 }
+apply plugin: 'io.objectbox'
