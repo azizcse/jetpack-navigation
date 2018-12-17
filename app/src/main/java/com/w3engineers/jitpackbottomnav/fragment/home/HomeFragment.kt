@@ -81,8 +81,9 @@ class HomeFragment : BaseFragment(), ItemClickListener<User> {
             }
             else -> {
                 val bundle = Bundle()
+                Log.e("user_id", "User id ="+item.userId)
                 bundle.putParcelable("user", item)
-                Navigation.findNavController(view!!).navigate(R.id.open_profile, bundle)
+                Navigation.findNavController(view!!).navigate(R.id.open_chat_page, bundle)
             }
         }
     }

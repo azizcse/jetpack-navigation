@@ -5,6 +5,7 @@ import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.w3engineers.jitpackbottomnav.R
+import com.w3engineers.jitpackbottomnav.util.NotificationUtil
 
 
 /*
@@ -40,10 +41,15 @@ class ProfileImageFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when (item?.itemId) {
-            R.id.share_menu->{
-                Toast.makeText(activity,"Share menu", Toast.LENGTH_SHORT).show()
+            R.id.share_menu -> {
+                Toast.makeText(activity, "Share menu", Toast.LENGTH_SHORT).show()
                 return true
-            } else -> super.onOptionsItemSelected(item)
+            }
+            R.id.notify_menu -> {
+                NotificationUtil.showNotification()
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 }

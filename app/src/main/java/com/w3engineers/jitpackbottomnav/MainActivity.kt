@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity(), NavController.OnNavigatedListener {
         navController = navHostFragment.navController
 
         navController.addOnNavigatedListener(this)
+
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -40,6 +41,7 @@ class MainActivity : AppCompatActivity(), NavController.OnNavigatedListener {
 
     override fun onNavigated(controller: NavController, destination: NavDestination) {
         val title = destination.label
+        Log.e("Item_list", "destination "+title )
         supportActionBar!!.title = title
         if(title!!.equals("Chat") || title!!.equals("Profile image")){
             toggleBottomView(false)
