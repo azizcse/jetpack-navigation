@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -87,7 +88,7 @@ class ChatFragment : BaseFragment() {
                 return true
             }
             R.id.profile_menu->{
-                Navigation.findNavController(view!!).navigate(R.id.open_fragment_profile)
+                findNavController().navigate(ChatFragmentDirections.openFragmentProfile())
                 return true
             }
             else -> super.onOptionsItemSelected(item)

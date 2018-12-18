@@ -5,8 +5,10 @@ import com.w3engineers.jitpackbottomnav.App
 import com.w3engineers.jitpackbottomnav.data.model.Message
 import com.w3engineers.jitpackbottomnav.data.model.Message_
 import com.w3engineers.jitpackbottomnav.data.model.User
+import com.w3engineers.jitpackbottomnav.data.model.User_
 import io.objectbox.Box
 import io.objectbox.query.QueryBuilder
+import io.objectbox.query.QueryConsumer
 import io.objectbox.rx.RxQuery
 import io.reactivex.Flowable
 import io.reactivex.functions.Function
@@ -31,8 +33,8 @@ class HistoryViewModel : ViewModel() {
     // val message = messageBox.query().equal(Message_.friendsId, it.userId).build().find(1, 1)
 
     fun getUserLiveData(): List<User> {
-        val customerIds = userBox.query().build().findIds();
-        //messageBox.query().`in`(Message_.id, customerIds).filter {  }
+        val customerIds = userBox.query().build().property(User_.userId).distinct().findStrings()
+        //val messageses = messageBox.query().`in`(Message_.friendsId, customerIds).build().forEach(QueryConsumer {  })
 
         val users = userBox.all
         val history = ArrayList<User>()
