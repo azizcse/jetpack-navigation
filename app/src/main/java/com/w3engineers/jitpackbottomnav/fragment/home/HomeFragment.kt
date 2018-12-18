@@ -7,6 +7,8 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.core.kbasekit.ui.base.ItemClickListener
@@ -80,10 +82,7 @@ class HomeFragment : BaseFragment(), ItemClickListener<User> {
                 homeViewModel.deleteItem(item)
             }
             else -> {
-                val bundle = Bundle()
-                Log.e("user_id", "User id ="+item.userId)
-                bundle.putParcelable("user", item)
-                Navigation.findNavController(view!!).navigate(R.id.open_chat_page, bundle)
+                findNavController().navigate(HomeFragmentDirections.OpenChatPage(item))
             }
         }
     }

@@ -14,6 +14,7 @@ package com.w3engineers.jitpackbottomnav.fragment.home;
  */
 
 import android.content.Context;
+import android.graphics.Path;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.databinding.ViewDataBinding;
+import androidx.navigation.NavDirections;
 import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;

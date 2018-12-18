@@ -39,8 +39,7 @@ object NotificationUtil {
         // Prepare the pending intent, while specifying the graph and destination
         val pendingIndent = NavDeepLinkBuilder(App.getContext())
             .setGraph(R.navigation.bottom_nav_graph)
-            .setDestination(R.id.fragment_chat)
-            .setArguments(HomeFragmentDirections.openChatPage(user.get(0)).arguments)
+            .setDestination(R.id.user_profile)
             .createPendingIntent()
 
 
