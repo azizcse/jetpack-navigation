@@ -55,7 +55,7 @@ class HomeFragment : BaseFragment(), ItemClickListener<User> {
         binding.userRv.adapter = pagedAdapter
         binding.userRv.layoutManager = LinearLayoutManager(activity)
         binding.userRv.setHasFixedSize(true)
-        binding.openProfilePage.setOnClickListener(this)
+       // binding.openProfilePage.setOnClickListener(this)
     }
 
     fun loadData() {

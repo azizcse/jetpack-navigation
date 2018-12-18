@@ -31,7 +31,17 @@ class MainActivity : AppCompatActivity(), NavController.OnNavigatedListener {
 
         navController = navHostFragment.navController
 
+        navigation.isItemHorizontalTranslationEnabled = true
+
+
         navController.addOnNavigatedListener(this)
+
+        /**
+         * This will select the given id fragment
+         */
+        //navigation.selectedItemId = R.id.setting_fragment
+
+        //navigation.inflateMenu(R.menu.menu_home)
 
     }
 
@@ -87,6 +97,8 @@ class MainActivity : AppCompatActivity(), NavController.OnNavigatedListener {
         if (currentFocus != null) {
             inputManager.hideSoftInputFromWindow(currentFocus.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
         }
+
+
     }
 
 }

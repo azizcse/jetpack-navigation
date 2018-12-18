@@ -8,16 +8,15 @@
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/user_rv"
                 android:layout_width="match_parent"
-                android:layout_height="391dp"
+                android:layout_height="match_parent"
                 android:layout_marginTop="8dp"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toTopOf="@+id/open_profile_page"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="8dp"/>
-        <Button
+        <!--<Button
                 android:id="@+id/open_profile_page"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -28,7 +27,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginBottom="56dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0.464"/>
+                app:layout_constraintHorizontal_bias="0.464"/>-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

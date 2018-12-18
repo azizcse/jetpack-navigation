@@ -22,6 +22,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
+            app:labelVisibilityMode="unlabeled"
+            app:elevation="@dimen/elevation_10"
             app:menu="@menu/menu_bottom_navigation"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
