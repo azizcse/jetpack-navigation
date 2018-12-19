@@ -46,7 +46,7 @@ class ProfileImageFragment : Fragment() {
                 return true
             }
             R.id.notify_menu -> {
-                NotificationUtil.showNotification()
+                NotificationUtil.showGeneralNotification()
                 return true
             }
             else -> super.onOptionsItemSelected(item)

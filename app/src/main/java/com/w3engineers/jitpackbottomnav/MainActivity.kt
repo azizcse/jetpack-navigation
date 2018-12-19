@@ -12,6 +12,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.w3engineers.jitpackbottomnav.util.AnimUtil
 import android.content.Context
 import android.view.inputmethod.InputMethodManager
+import com.w3engineers.jitpackbottomnav.data.model.User
+import com.w3engineers.jitpackbottomnav.fragment.home.HomeFragmentDirections
 
 
 class MainActivity : AppCompatActivity(), NavController.OnNavigatedListener {
@@ -45,34 +47,44 @@ class MainActivity : AppCompatActivity(), NavController.OnNavigatedListener {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        // val intent = intent
+        if (intent.hasExtra("user")) {
+            val user = intent.getParcelableExtra<User>("user")
+            Log.e("Intent_value"," user name ="+user.userName)
+            navController.navigate(HomeFragmentDirections.openChatPage(user))
+        }
+    }
+
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
     override fun onNavigated(controller: NavController, destination: NavDestination) {
         val title = destination.label
-        Log.e("Item_list", "destination "+title )
+        Log.e("Item_list", "destination " + title)
         supportActionBar!!.title = title
-        if(title!!.equals("Chat") || title!!.equals("Profile image")){
+        if (title!!.equals("Chat") || title!!.equals("Profile image")) {
             toggleBottomView(false)
             supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        }else{
+        } else {
             supportActionBar!!.setDisplayHomeAsUpEnabled(false)
             toggleBottomView(true)
         }
     }
 
     private fun toggleBottomView(needToShow: Boolean) {
-        if(needToShow){
-            AnimUtil.slideUp(this,navigation)
-        }else{
-            AnimUtil.slideDown(this,navigation)
+        if (needToShow) {
+            AnimUtil.slideUp(this, navigation)
+        } else {
+            AnimUtil.slideDown(this, navigation)
         }
         hideKeyboard()
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if(item!!.itemId == android.R.id.home){
+        if (item!!.itemId == android.R.id.home) {
             popFragment()
         }
         return super.onOptionsItemSelected(item)
@@ -84,10 +96,10 @@ class MainActivity : AppCompatActivity(), NavController.OnNavigatedListener {
     }
 
 
-    fun popFragment(){
+    fun popFragment() {
         val fragmentManager = supportFragmentManager.fragments
-        if(fragmentManager.size> 0){
-            Log.e("Item_list", "Pop fragments" )
+        if (fragmentManager.size > 0) {
+            Log.e("Item_list", "Pop fragments")
             //supportFragmentManager.popBackStack()
         }
     }
@@ -97,7 +109,6 @@ class MainActivity : AppCompatActivity(), NavController.OnNavigatedListener {
         if (currentFocus != null) {
             inputManager.hideSoftInputFromWindow(currentFocus.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
         }
-
 
     }
 
