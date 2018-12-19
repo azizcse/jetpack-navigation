@@ -26,6 +26,7 @@ import org.workfort.base.ui.base.BaseFragment
 
 class MessageFragment : BaseFragment() {
 
+
     lateinit var binding: FragmentMessageBinding
     lateinit var messageViewModel: HistoryViewModel
 
@@ -35,13 +36,15 @@ class MessageFragment : BaseFragment() {
     override val getMenuId: Int
         get() = R.menu.menu_message
 
+    override fun currentFragment(): Fragment = this
+
     override fun startView() {
         binding = getViewBinding() as FragmentMessageBinding
         messageViewModel = HistoryViewModel()
 
         val userList = messageViewModel.getUserLiveData()
 
-        for(user : User in userList) {
+        for (user: User in userList) {
             Log.e("History_", "List size =" + user.lastMessage)
         }
     }

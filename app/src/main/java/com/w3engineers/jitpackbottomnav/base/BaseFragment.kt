@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import com.w3engineers.jitpackbottomnav.MainActivity
 import java.lang.RuntimeException
 
 
@@ -27,12 +28,14 @@ abstract class BaseFragment : Fragment(), View.OnClickListener {
     abstract val getMenuId: Int
     private val DEFAULT_VALUE = 0
 
+
     private lateinit var viewBinding: ViewDataBinding
 
     //abstract method
     abstract fun startView()
 
     abstract fun stopView()
+    abstract fun currentFragment(): Fragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,7 +73,12 @@ abstract class BaseFragment : Fragment(), View.OnClickListener {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-    override fun onClick(view: View?) {
-
+    override fun onResume() {
+        super.onResume()
+        if (activity != null && activity is MainActivity) {
+            (activity as MainActivity).currentFragment(currentFragment())
+        }
     }
+
+    override fun onClick(view: View?) {}
 }

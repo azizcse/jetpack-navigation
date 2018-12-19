@@ -45,6 +45,8 @@ class ChatFragment : BaseFragment() {
     override val getMenuId: Int
         get() = R.menu.menu_profile
 
+    override fun currentFragment(): Fragment = this
+
     override fun startView() {
         binding = getViewBinding() as FragmentChatBinding
         chatAdapter = ChatAdapter(activity)

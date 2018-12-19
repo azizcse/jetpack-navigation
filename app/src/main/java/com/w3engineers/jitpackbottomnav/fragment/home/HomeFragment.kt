@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
@@ -48,7 +49,7 @@ class HomeFragment : BaseFragment(), ItemClickListener<User> {
         initRecyclerView()
         loadData()
     }
-
+    override fun currentFragment(): Fragment = this
 
     fun initRecyclerView() {
         pagedAdapter = UserPagedListAdapter(activity, this)

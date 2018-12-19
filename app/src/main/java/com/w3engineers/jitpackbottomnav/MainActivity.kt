@@ -12,7 +12,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.w3engineers.jitpackbottomnav.util.AnimUtil
 import android.content.Context
 import android.view.inputmethod.InputMethodManager
+import androidx.fragment.app.Fragment
 import com.w3engineers.jitpackbottomnav.data.model.User
+import com.w3engineers.jitpackbottomnav.fragment.home.HomeFragment
 import com.w3engineers.jitpackbottomnav.fragment.home.HomeFragmentDirections
 
 
@@ -20,8 +22,11 @@ class MainActivity : AppCompatActivity(), NavController.OnNavigatedListener {
 
     private lateinit var navController: NavController
     private lateinit var navigation: BottomNavigationView
+    private lateinit var currentFragment : Fragment
 
-
+    fun currentFragment(fragment: Fragment){
+        this.currentFragment = fragment
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -54,6 +59,7 @@ class MainActivity : AppCompatActivity(), NavController.OnNavigatedListener {
             val user = intent.getParcelableExtra<User>("user")
             Log.e("Intent_value"," user name ="+user.userName)
             navController.navigate(HomeFragmentDirections.openChatPage(user))
+            intent.removeExtra("user")
         }
     }
 
@@ -101,6 +107,9 @@ class MainActivity : AppCompatActivity(), NavController.OnNavigatedListener {
         if (fragmentManager.size > 0) {
             Log.e("Item_list", "Pop fragments")
             //supportFragmentManager.popBackStack()
+            if(currentFragment is HomeFragment){
+
+            }
         }
     }
 
@@ -109,7 +118,7 @@ class MainActivity : AppCompatActivity(), NavController.OnNavigatedListener {
         if (currentFocus != null) {
             inputManager.hideSoftInputFromWindow(currentFocus.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
         }
-
     }
+
 
 }
