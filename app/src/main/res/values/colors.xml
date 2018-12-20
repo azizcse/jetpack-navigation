@@ -7,4 +7,5 @@
     <color name="grey_400">#BDBDBD</color>
     <color name="incoming_message_color">#D6FDEE</color>
     <color name="outcoming_message_color">#F0F0F0</color>
+    <color name="bottom_bar_color">#B2DFDB</color>
 </resources>

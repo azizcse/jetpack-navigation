@@ -1,5 +1,6 @@
 package com.w3engineers.jitpackbottomnav
 
+import android.content.BroadcastReceiver
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -11,6 +12,8 @@ import androidx.navigation.ui.NavigationUI
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.w3engineers.jitpackbottomnav.util.AnimUtil
 import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import com.w3engineers.jitpackbottomnav.data.model.User
@@ -43,6 +46,8 @@ class MainActivity : AppCompatActivity(), NavController.OnNavigatedListener {
 
         navController.addOnNavigatedListener(this)
 
+
+
         /**
          * This will select the given id fragment
          */
@@ -61,6 +66,7 @@ class MainActivity : AppCompatActivity(), NavController.OnNavigatedListener {
             navController.navigate(HomeFragmentDirections.openChatPage(user))
             intent.removeExtra("user")
         }
+
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -78,6 +84,7 @@ class MainActivity : AppCompatActivity(), NavController.OnNavigatedListener {
             supportActionBar!!.setDisplayHomeAsUpEnabled(false)
             toggleBottomView(true)
         }
+
     }
 
     private fun toggleBottomView(needToShow: Boolean) {
