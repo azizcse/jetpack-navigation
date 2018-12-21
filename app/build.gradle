@@ -31,30 +31,27 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "android.arch.navigation:navigation-fragment-ktx:1.0.0-alpha07"
-    implementation "android.arch.navigation:navigation-ui-ktx:1.0.0-alpha07"
+    implementation "android.arch.navigation:navigation-fragment-ktx:$navigation"
+    implementation "android.arch.navigation:navigation-ui-ktx:$navigation"
+    implementation "android.arch.navigation:navigation-fragment:$navigation"
+    implementation "android.arch.navigation:navigation-ui:$navigation"
 
     //room
     //kapt "androidx.room:room-compiler:2.0.0-rc01"
     //implementation "androidx.room:room-runtime:2.0.0-rc01"
 
     //lifecycle
-    implementation "androidx.lifecycle:lifecycle-extensions:2.0.0-rc01"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_aware"
 
     //Paging
-    implementation "androidx.paging:paging-common:2.0.0-rc01"
-    implementation "androidx.paging:paging-runtime:2.0.0-rc01"
+    implementation "androidx.paging:paging-common:$lifecycle_aware"
+    implementation "androidx.paging:paging-runtime:$lifecycle_aware"
 
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'com.google.android.material:material:1.1.0-alpha01'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
-    implementation "android.arch.navigation:navigation-fragment:1.0.0-alpha07"
-    implementation "android.arch.navigation:navigation-ui:1.0.0-alpha07"
-    implementation "androidx.recyclerview:recyclerview:1.0.0"
+    implementation "androidx.appcompat:appcompat:$appcompact"
+    implementation "com.google.android.material:material:$material"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintlayout"
+    implementation "androidx.recyclerview:recyclerview:$recyclerview"
 
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
     implementation 'com.android.volley:volley:1.1.0'
     //anko
     implementation "org.jetbrains.anko:anko-commons:0.10.8"
@@ -64,5 +61,11 @@ dependencies {
     //debugImplementation "io.objectbox:objectbox-android-objectbrowser:$objectboxVersion"
     debugImplementation "io.objectbox:objectbox-android-objectbrowser:$objectboxVersion"
     releaseImplementation "io.objectbox:objectbox-android:$objectboxVersion"
+
+    //Test tools
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+
 }
 apply plugin: 'io.objectbox'
