@@ -8,11 +8,13 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import com.core.kbasekit.ui.base.ItemClickListener;
+import com.w3engineers.jitpackbottomnav.MainActivity;
 import com.w3engineers.jitpackbottomnav.R;
 import com.w3engineers.jitpackbottomnav.data.model.User;
 import com.w3engineers.jitpackbottomnav.databinding.FragmentTodaysFixtureBinding;
 import com.w3engineers.jitpackbottomnav.fragment.home.HomeViewModel;
 import com.w3engineers.jitpackbottomnav.fragment.home.UserPagedListAdapter;
+import com.w3engineers.jitpackbottomnav.util.BottomBarHandle;
 import org.jetbrains.annotations.NotNull;
 import org.workfort.base.ui.base.BaseFragment;
 
@@ -82,6 +84,9 @@ public class TodaysFixturesFragment extends BaseFragment implements ItemClickLis
         binding.recyclerViewAllFixtures.setAdapter(pagedAdapter);
         binding.recyclerViewAllFixtures.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.recyclerViewAllFixtures.setHasFixedSize(true);
+        MainActivity mainActivity=(MainActivity)getActivity();
+
+        binding.recyclerViewAllFixtures.addOnScrollListener(new BottomBarHandle(mainActivity));
         // binding.openProfilePage.setOnClickListener(this)
     }
 

@@ -21,15 +21,30 @@ import com.w3engineers.jitpackbottomnav.fragment.home.HomeFragment
 import com.w3engineers.jitpackbottomnav.fragment.home.HomeFragmentDirections
 
 
-class MainActivity : AppCompatActivity(), NavController.OnNavigatedListener {
+class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedListener {
+    override fun onDestinationChanged(controller: NavController, destination: NavDestination, arguments: Bundle?) {
+
+        val title = destination.label
+        Log.e("Item_list", "destination " + title)
+        supportActionBar!!.title = title
+        if (title!!.equals("Chat") || title!!.equals("Profile image")) {
+            toggleBottomView(false)
+            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        } else {
+            supportActionBar!!.setDisplayHomeAsUpEnabled(false)
+            toggleBottomView(true)
+        }
+
+    }
 
     private lateinit var navController: NavController
     private lateinit var navigation: BottomNavigationView
-    private lateinit var currentFragment : Fragment
+    private lateinit var currentFragment: Fragment
 
-    fun currentFragment(fragment: Fragment){
+    fun currentFragment(fragment: Fragment) {
         this.currentFragment = fragment
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -44,8 +59,7 @@ class MainActivity : AppCompatActivity(), NavController.OnNavigatedListener {
         navigation.isItemHorizontalTranslationEnabled = true
 
 
-        navController.addOnNavigatedListener(this)
-
+        navController.addOnDestinationChangedListener(this)
 
 
         /**
@@ -62,7 +76,7 @@ class MainActivity : AppCompatActivity(), NavController.OnNavigatedListener {
         // val intent = intent
         if (intent.hasExtra("user")) {
             val user = intent.getParcelableExtra<User>("user")
-            Log.e("Intent_value"," user name ="+user.userName)
+            Log.e("Intent_value", " user name =" + user.userName)
             navController.navigate(HomeFragmentDirections.openChatPage(user))
             intent.removeExtra("user")
         }
@@ -73,21 +87,8 @@ class MainActivity : AppCompatActivity(), NavController.OnNavigatedListener {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
-    override fun onNavigated(controller: NavController, destination: NavDestination) {
-        val title = destination.label
-        Log.e("Item_list", "destination " + title)
-        supportActionBar!!.title = title
-        if (title!!.equals("Chat") || title!!.equals("Profile image")) {
-            toggleBottomView(false)
-            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        } else {
-            supportActionBar!!.setDisplayHomeAsUpEnabled(false)
-            toggleBottomView(true)
-        }
 
-    }
-
-    private fun toggleBottomView(needToShow: Boolean) {
+    fun toggleBottomView(needToShow: Boolean) {
         if (needToShow) {
             AnimUtil.slideUp(this, navigation)
         } else {
@@ -114,7 +115,7 @@ class MainActivity : AppCompatActivity(), NavController.OnNavigatedListener {
         if (fragmentManager.size > 0) {
             Log.e("Item_list", "Pop fragments")
             //supportFragmentManager.popBackStack()
-            if(currentFragment is HomeFragment){
+            if (currentFragment is HomeFragment) {
 
             }
         }
