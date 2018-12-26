@@ -30,6 +30,11 @@
             android:name="com.w3engineers.jitpackbottomnav.fragment.SettingFragment"
             android:label="Setting"
             tools:layout="@layout/fragment_home"/>
+    <fragment
+            android:id="@+id/tabby_fragment"
+            android:name="com.w3engineers.jitpackbottomnav.fragment.tabby.FixturesTabs"
+            android:label="Tabby"
+            tools:layout="@layout/fragment_home"/>
 
     <activity
             android:name="com.w3engineers.jitpackbottomnav.activity.ProfileActivity"
