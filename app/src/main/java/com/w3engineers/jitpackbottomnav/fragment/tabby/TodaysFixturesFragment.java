@@ -3,7 +3,9 @@ package com.w3engineers.jitpackbottomnav.fragment.tabby;
 import android.util.Log;
 import android.view.View;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import com.core.kbasekit.ui.base.ItemClickListener;
 import com.w3engineers.jitpackbottomnav.R;
@@ -12,23 +14,6 @@ import com.w3engineers.jitpackbottomnav.databinding.FragmentTodaysFixtureBinding
 import com.w3engineers.jitpackbottomnav.fragment.home.HomeViewModel;
 import com.w3engineers.jitpackbottomnav.fragment.home.UserPagedListAdapter;
 import org.jetbrains.annotations.NotNull;
-import org.workfort.base.ui.base.BaseFragment;
-
-
-import android.os.Bundle;
-import android.util.Log;
-import android.view.*;
-import android.widget.Toast;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.navigation.Navigation;
-import androidx.paging.PagedList;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import com.core.kbasekit.ui.base.ItemClickListener;
-import com.w3engineers.jitpackbottomnav.R;
-import com.w3engineers.jitpackbottomnav.data.model.User;
-import com.w3engineers.jitpackbottomnav.databinding.FragmentHomeBinding;
 import org.workfort.base.ui.base.BaseFragment;
 
 /**

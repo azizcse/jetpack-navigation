@@ -80,6 +80,8 @@ public class UserPagedListAdapter extends PagedListAdapter<User, UserPagedListAd
 
         @Override
         public void onClick(View view) {
+            int index = getAdapterPosition();
+            if(index < 0 || index >= getItemCount()) return;
             itemClickListener.onItemClick(view, getItem(getAdapterPosition()));
         }
     }
