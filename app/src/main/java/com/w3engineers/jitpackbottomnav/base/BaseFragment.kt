@@ -7,6 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import com.w3engineers.jitpackbottomnav.MainActivity
+import com.w3engineers.jitpackbottomnav.base.BaseActivity
 import java.lang.RuntimeException
 
 
@@ -24,6 +25,7 @@ import java.lang.RuntimeException
 */
 
 abstract class BaseFragment : Fragment(), View.OnClickListener {
+
     abstract val getLayoutId: Int
     abstract val getMenuId: Int
     private val DEFAULT_VALUE = 0
@@ -75,8 +77,10 @@ abstract class BaseFragment : Fragment(), View.OnClickListener {
 
     override fun onResume() {
         super.onResume()
-        if (activity != null && activity is MainActivity) {
-            (activity as MainActivity).currentFragment(currentFragment())
+
+        if (activity != null && activity is BaseActivity) {
+
+            (activity as BaseActivity).currentFragment = currentFragment()
         }
     }
 

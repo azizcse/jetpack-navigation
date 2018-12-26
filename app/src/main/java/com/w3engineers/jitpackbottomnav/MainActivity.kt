@@ -14,14 +14,22 @@ import com.w3engineers.jitpackbottomnav.util.AnimUtil
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.databinding.DataBindingUtil.setContentView
 import androidx.fragment.app.Fragment
+import com.w3engineers.jitpackbottomnav.base.BaseActivity
 import com.w3engineers.jitpackbottomnav.data.model.User
 import com.w3engineers.jitpackbottomnav.fragment.home.HomeFragment
 import com.w3engineers.jitpackbottomnav.fragment.home.HomeFragmentDirections
 
 
-class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedListener {
+class MainActivity : BaseActivity(), NavController.OnDestinationChangedListener {
+
+    override val getItemIdToHide: View
+        get() = navigation
+
     override fun onDestinationChanged(controller: NavController, destination: NavDestination, arguments: Bundle?) {
 
         val title = destination.label
@@ -39,11 +47,6 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
 
     private lateinit var navController: NavController
     private lateinit var navigation: BottomNavigationView
-    private lateinit var currentFragment: Fragment
-
-    fun currentFragment(fragment: Fragment) {
-        this.currentFragment = fragment
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,17 +61,13 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
 
         navigation.isItemHorizontalTranslationEnabled = true
 
-
         navController.addOnDestinationChangedListener(this)
-
 
         /**
          * This will select the given id fragment
          */
         //navigation.selectedItemId = R.id.setting_fragment
-
         //navigation.inflateMenu(R.menu.menu_home)
-
     }
 
     override fun onResume() {
@@ -80,7 +79,6 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
             navController.navigate(HomeFragmentDirections.openChatPage(user))
             intent.removeExtra("user")
         }
-
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -88,14 +86,7 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
     }
 
 
-    fun toggleBottomView(needToShow: Boolean) {
-        if (needToShow) {
-            AnimUtil.slideUp(this, navigation)
-        } else {
-            AnimUtil.slideDown(this, navigation)
-        }
-        hideKeyboard()
-    }
+
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item!!.itemId == android.R.id.home) {
@@ -121,12 +112,7 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         }
     }
 
-    fun hideKeyboard() {
-        val inputManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        if (currentFocus != null) {
-            inputManager.hideSoftInputFromWindow(currentFocus.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
-        }
-    }
+
 
 
 }

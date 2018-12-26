@@ -2,6 +2,7 @@ package com.w3engineers.jitpackbottomnav.util
 
 import androidx.recyclerview.widget.RecyclerView
 import com.w3engineers.jitpackbottomnav.MainActivity
+import com.w3engineers.jitpackbottomnav.base.BaseActivity
 
 
 /*
@@ -17,7 +18,7 @@ import com.w3engineers.jitpackbottomnav.MainActivity
 *  ****************************************************************************
 */
 
-class BottomBarHandle internal constructor(val mainActivity: MainActivity) : RecyclerView.OnScrollListener() {
+class BottomBarHandle internal constructor(val mainActivity: BaseActivity) : RecyclerView.OnScrollListener() {
 
     var scrollCallTime = 0L
 
@@ -26,7 +27,9 @@ class BottomBarHandle internal constructor(val mainActivity: MainActivity) : Rec
         super.onScrolled(recyclerView, dx, dy)
 
         if (Math.abs(System.currentTimeMillis() - scrollCallTime) < 500) return
+
         scrollCallTime = System.currentTimeMillis()
+
         if (dy > 0) {
             mainActivity.toggleBottomView(false)
             hideToolbar()
@@ -35,7 +38,6 @@ class BottomBarHandle internal constructor(val mainActivity: MainActivity) : Rec
             showToolbar()
         }
     }
-
 
     fun showToolbar(){
         if(!mainActivity.supportActionBar!!.isShowing){
