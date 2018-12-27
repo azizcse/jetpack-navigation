@@ -25,6 +25,10 @@
         </activity>
 
         <activity android:name=".activity.ProfileActivity"/>
+        <activity android:name=".fragment.tabby.ExpandableRecyclerViewOneActivity"
+
+        android:theme="@style/Theme.AppCompat.NoActionBar"
+        />
         <activity android:name=".MainActivity">
             <nav-graph android:value="@navigation/bottom_nav_graph"/>
         </activity>

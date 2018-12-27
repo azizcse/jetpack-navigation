@@ -83,7 +83,7 @@ class HomeFragment : BaseFragment(), ItemClickListener<User> {
                 homeViewModel.deleteItem(item)
             }
             else -> {
-                findNavController().navigate(HomeFragmentDirections.OpenChatPage(item))
+                findNavController().navigate(HomeFragmentDirections.openExpandRecyclerView(item))
             }
         }
     }

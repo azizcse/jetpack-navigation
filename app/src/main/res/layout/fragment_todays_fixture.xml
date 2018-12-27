@@ -8,6 +8,12 @@
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_all_fixtures"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="wrap_content"/>
+
+        <com.github.jdsjlzx.recyclerview.LRecyclerView
+                android:id="@+id/l_recycler_view_all_fixtures"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"/>
     </LinearLayout>
 </layout>

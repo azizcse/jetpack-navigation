@@ -10,7 +10,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.w3engineers.jitpackbottomnav"
-        minSdkVersion 21
+        minSdkVersion 22
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -61,6 +61,9 @@ dependencies {
     //debugImplementation "io.objectbox:objectbox-android-objectbrowser:$objectboxVersion"
     debugImplementation "io.objectbox:objectbox-android-objectbrowser:$objectboxVersion"
     releaseImplementation "io.objectbox:objectbox-android:$objectboxVersion"
+
+
+    implementation 'com.github.jdsjlzx:LRecyclerView:1.5.4.3'
 
     //Test tools
     testImplementation 'junit:junit:4.12'

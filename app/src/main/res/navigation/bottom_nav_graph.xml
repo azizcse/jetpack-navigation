@@ -17,6 +17,13 @@
                 app:exitAnim="@anim/slide_out_left"
                 app:popEnterAnim="@anim/slide_in_left"
                 app:popExitAnim="@anim/slide_out_right"/>
+
+        <action android:id="@+id/open_expand_recycler_view"
+                app:destination="@id/expand_recycler_view"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
 
     <fragment
@@ -41,6 +48,17 @@
             android:id="@+id/user_profile"
             android:label="Profile"
             tools:layout="@layout/activity_profile"/>
+    <activity
+            android:name="com.w3engineers.jitpackbottomnav.fragment.tabby.ExpandableRecyclerViewOneActivity"
+            android:id="@+id/expand_recycler_view"
+            android:label="Expand Recycler View"
+            tools:layout="@layout/sample_ll_activity">
+
+        <argument
+                android:name="user"
+                app:nullable="true"
+                app:argType="com.w3engineers.jitpackbottomnav.data.model.User"/>
+    </activity>
 
     <fragment
             android:id="@+id/fragment_chat"
