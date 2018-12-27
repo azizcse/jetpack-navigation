@@ -16,6 +16,7 @@ public class CommentExpandAdapter extends ExpandableRecyclerAdapter<CommentItem>
     public static final int TYPE_PERSON = 1001;
 
     private LRecyclerView recyclerView;
+
     public CommentExpandAdapter(Context context, LRecyclerView recyclerView) {
         super(context);
         this.recyclerView = recyclerView;
@@ -27,7 +28,7 @@ public class CommentExpandAdapter extends ExpandableRecyclerAdapter<CommentItem>
 
 
         public CommentViewHolder(View view, LRecyclerView recyclerView) {
-            super(view, (ImageView) view.findViewById(R.id.item_arrow),recyclerView);
+            super(view, (ImageView) view.findViewById(R.id.item_arrow), recyclerView);
 
             tvName = (TextView) view.findViewById(R.id.tvname);
             tvComment = (TextView) view.findViewById(R.id.tvComment);
@@ -47,6 +48,7 @@ public class CommentExpandAdapter extends ExpandableRecyclerAdapter<CommentItem>
     public class CommentChildViewHolder extends ExpandableRecyclerAdapter.ViewHolder {
         TextView tvName, tvComment, tvTime;
         ImageView imgAvatar;
+
         public CommentChildViewHolder(View view) {
             super(view);
             tvName = (TextView) view.findViewById(R.id.tvname);
@@ -87,8 +89,11 @@ public class CommentExpandAdapter extends ExpandableRecyclerAdapter<CommentItem>
 
     }
 
-    public ArrayList<CommentItem> getSampleItems() {
+    public ArrayList<CommentItem> getSampleItems(int currentItemCount) {
+
+        int nextRange = currentItemCount + 5;
         ArrayList<CommentItem> items = new ArrayList<>();
+
         /*
         for (int i = 0; i < 3; i++) {
             items.add(new CommentItem("Friends"));
@@ -124,15 +129,14 @@ public class CommentExpandAdapter extends ExpandableRecyclerAdapter<CommentItem>
                 "(open for extension but closed for modification)", "Lake"));
         */
 
-        for (int i = 1; i < 100; i++) {
+        for (int i = currentItemCount; i < nextRange; i++) {
 
-            items.add(new CommentItem("Group "+i));
+            items.add(new CommentItem("Group " + i));
 
-            for (int j = 1; j< 10; j++) {
-                items.add(new CommentItem("Person "+i, "Stay"+j));
+            for (int j = currentItemCount; j < nextRange; j++) {
+                items.add(new CommentItem("Person " + i, "Stay" + j));
             }
         }
-
 
         return items;
     }

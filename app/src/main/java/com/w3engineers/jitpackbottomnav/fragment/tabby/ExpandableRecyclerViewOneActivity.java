@@ -37,7 +37,7 @@ public class ExpandableRecyclerViewOneActivity extends AppCompatActivity {
     /**
      * 服务器端一共多少条数据
      */
-    private static final int TOTAL_COUNTER = 24;
+    private static final int TOTAL_COUNTER = 2040;
 
     /**
      * 每一页展示多少条数据
@@ -53,7 +53,6 @@ public class ExpandableRecyclerViewOneActivity extends AppCompatActivity {
 
     private CommentExpandAdapter mDataAdapter = null;
 
-    private PreviewHandler mHandler = new PreviewHandler(this);
     private LRecyclerViewAdapter mLRecyclerViewAdapter = null;
 
     private boolean isRefresh = false;
@@ -88,11 +87,9 @@ public class ExpandableRecyclerViewOneActivity extends AppCompatActivity {
             public void onRefresh() {
                 mCurrentCounter = 0;
                 isRefresh = true;
-                requestData();
+                requestData(mCurrentCounter);
             }
         });
-
-        mRecyclerView.refresh();
 
         mRecyclerView.setLScrollListener(new LRecyclerView.LScrollListener() {
             @Override
@@ -119,9 +116,11 @@ public class ExpandableRecyclerViewOneActivity extends AppCompatActivity {
         mRecyclerView.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
+
+                Toast.makeText(ExpandableRecyclerViewOneActivity.this, "OnLoadMoreListener " + mCurrentCounter, Toast.LENGTH_LONG).show();
                 if (mCurrentCounter < TOTAL_COUNTER) {
                     // loading data
-                    requestData();
+                    requestData(mCurrentCounter);
                 } else {
                     mRecyclerView.setNoMore(true);
                 }
@@ -155,11 +154,12 @@ public class ExpandableRecyclerViewOneActivity extends AppCompatActivity {
             }
         });*/
 
+        mRecyclerView.refresh();
     }
 
     private void showToast(String txt) {
 
-        Toast.makeText(this, txt, Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, txt, Toast.LENGTH_LONG).show();
     }
 
     private void notifyDataSetChanged() {
@@ -172,95 +172,27 @@ public class ExpandableRecyclerViewOneActivity extends AppCompatActivity {
         mCurrentCounter += list.size();
     }
 
-    private class PreviewHandler extends Handler {
-
-        private WeakReference<ExpandableRecyclerViewOneActivity> ref;
-
-        PreviewHandler(ExpandableRecyclerViewOneActivity activity) {
-            ref = new WeakReference<>(activity);
-        }
-
-        @Override
-        public void handleMessage(Message msg) {
-            final ExpandableRecyclerViewOneActivity activity = ref.get();
-            if (activity == null || activity.isFinishing()) {
-                return;
-            }
-            switch (msg.what) {
-
-                case -1:
-                    if (activity.isRefresh) {
-                        //activity.mDataAdapter.clear();
-                        mCurrentCounter = 0;
-                    }
-
-                    int currentSize = activity.mDataAdapter.getItemCount();
-
-                    //模拟组装10个数据
-                    ArrayList<ItemModel> newList = new ArrayList<>();
-                    for (int i = 0; i < 10; i++) {
-                        if (newList.size() + currentSize >= TOTAL_COUNTER) {
-                            break;
-                        }
-
-                        ItemModel item = new ItemModel();
-                        item.id = currentSize + i;
-                        item.title = "item" + (item.id);
-
-                        newList.add(item);
-                    }
-
-
-                    activity.addItems(activity.mDataAdapter.getSampleItems());
-
-                    activity.mRecyclerView.refreshComplete(10);
-                    activity.notifyDataSetChanged();
-                    break;
-                case -2:
-                    activity.notifyDataSetChanged();
-                    break;
-                case -3:
-
-                    activity.mRecyclerView.refreshComplete(10);
-                    activity.notifyDataSetChanged();
-                    activity.mRecyclerView.setOnNetWorkErrorListener(new OnNetWorkErrorListener() {
-                        @Override
-                        public void reload() {
-                            requestData();
-                        }
-                    });
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
-
     /**
      * 模拟请求网络
      */
-    private void requestData() {
-        Log.d(TAG, "requestData");
-        new Thread() {
+    private void requestData(final int currentItemCount) {
+        Log.d(TAG, "requestData: " + currentItemCount);
 
+        runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                super.run();
-
                 try {
                     Thread.sleep(800);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
 
-                //模拟一下网络请求失败的情况
-                if (NetworkUtils.isNetAvailable(ExpandableRecyclerViewOneActivity.this)) {
-                    mHandler.sendEmptyMessage(-1);
-                } else {
-                    mHandler.sendEmptyMessage(-1);
-                }
+                addItems(mDataAdapter.getSampleItems(currentItemCount));
+
+                mRecyclerView.refreshComplete(10);
+                notifyDataSetChanged();
             }
-        }.start();
+        });
     }
 
     @Override
