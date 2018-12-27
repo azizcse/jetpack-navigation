@@ -1,6 +1,10 @@
 package com.w3engineers.jitpackbottomnav.fragment.tabby;
 
 import androidx.fragment.app.Fragment;
+import com.w3engineers.jitpackbottomnav.R;
+import com.w3engineers.jitpackbottomnav.databinding.FragmentProfileBinding;
+import org.jetbrains.annotations.NotNull;
+import org.workfort.base.ui.base.BaseFragment;
 
 /**
  * * ============================================================================
@@ -24,5 +28,36 @@ import androidx.fragment.app.Fragment;
  * * ============================================================================
  **/
 
-public class MonthFixturesFragment extends Fragment {
+public class MonthFixturesFragment extends BaseFragment {
+    FragmentProfileBinding binding;
+
+    @Override
+    public int getGetLayoutId() {
+        return R.layout.fragment_profile;
+    }
+
+    @Override
+    public int getGetMenuId() {
+        return 0;
+    }
+
+    @Override
+    public void startView() {
+
+        binding = (FragmentProfileBinding) getViewBinding();
+
+        binding.textViewTitle.setText("Month Fixtures Fragment");
+    }
+
+
+    @Override
+    public void stopView() {
+
+    }
+
+    @NotNull
+    @Override
+    public Fragment currentFragment() {
+        return this;
+    }
 }
