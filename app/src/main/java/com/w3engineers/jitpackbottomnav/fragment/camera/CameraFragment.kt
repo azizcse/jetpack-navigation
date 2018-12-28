@@ -45,13 +45,13 @@ class CameraFragment : BaseFragment() {
         binding = getViewBinding() as FragmentCameraBinding
 
 
-            binding.jcCameraView.setSaveVideoPath(Environment.getExternalStorageDirectory().path)
-            binding.jcCameraView.setAutoFoucs(true)
-            val file = File(FileUtils.getDir("video"))
-            if (!file.exists())
-                file.mkdirs()
-            binding.jcCameraView.setSaveVideoPath(FileUtils.getDir("photo"))
-            initListener()
+        binding.jcCameraView.setSaveVideoPath(Environment.getExternalStorageDirectory().path)
+        binding.jcCameraView.setAutoFoucs(true)
+        val file = File(FileUtils.getDir("video"))
+        if (!file.exists())
+            file.mkdirs()
+        binding.jcCameraView.setSaveVideoPath(FileUtils.getDir("photo"))
+        initListener()
     }
 
     private fun initListener() {
