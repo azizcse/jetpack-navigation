@@ -15,8 +15,12 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.w3engineers.jitpackbottomnav.data.model.User
+import com.w3engineers.jitpackbottomnav.fragment.chat.ChatViewModel
 import com.w3engineers.jitpackbottomnav.fragment.home.HomeFragment
 import com.w3engineers.jitpackbottomnav.fragment.home.HomeFragmentDirections
 
@@ -26,6 +30,7 @@ class MainActivity : AppCompatActivity(), NavController.OnNavigatedListener {
     private lateinit var navController: NavController
     private lateinit var navigation: BottomNavigationView
     private lateinit var currentFragment : Fragment
+    private lateinit var mainViewModel: MainViewModel
 
     fun currentFragment(fragment: Fragment){
         this.currentFragment = fragment
@@ -46,7 +51,9 @@ class MainActivity : AppCompatActivity(), NavController.OnNavigatedListener {
 
         navController.addOnNavigatedListener(this)
 
+        mainViewModel = getViewModel()
 
+        subscribeViewMOdel()
 
         /**
          * This will select the given id fragment
@@ -55,6 +62,12 @@ class MainActivity : AppCompatActivity(), NavController.OnNavigatedListener {
 
         //navigation.inflateMenu(R.menu.menu_home)
 
+    }
+
+    private fun subscribeViewMOdel(){
+        mainViewModel.navigateToDetails.observe(this, Observer {
+            Toast.makeText(this,"Path "+it, Toast.LENGTH_SHORT).show()
+        })
     }
 
     override fun onResume() {
@@ -80,10 +93,16 @@ class MainActivity : AppCompatActivity(), NavController.OnNavigatedListener {
         if (title!!.equals("Chat") || title!!.equals("Profile image")) {
             toggleBottomView(false)
             supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        } else {
+        }else if(title!!.equals("Camera")){
+            supportActionBar!!.hide()
+            toggleBottomView(false)
+            return
+        }
+        else {
             supportActionBar!!.setDisplayHomeAsUpEnabled(false)
             toggleBottomView(true)
         }
+        supportActionBar!!.show()
 
     }
 
@@ -125,6 +144,17 @@ class MainActivity : AppCompatActivity(), NavController.OnNavigatedListener {
         if (currentFocus != null) {
             inputManager.hideSoftInputFromWindow(currentFocus.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
         }
+    }
+
+    private fun getViewModel(): MainViewModel {
+        return ViewModelProviders.of(this).get(MainViewModel::class.java)
+    }
+
+    fun getMainViewModel() : MainViewModel = mainViewModel
+
+
+    fun publishEvent(){
+
     }
 
 

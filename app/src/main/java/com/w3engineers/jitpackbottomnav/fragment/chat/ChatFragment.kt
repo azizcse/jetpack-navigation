@@ -1,5 +1,6 @@
 package com.w3engineers.jitpackbottomnav.fragment.chat
 
+import android.Manifest
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -17,6 +18,7 @@ import com.w3engineers.jitpackbottomnav.R
 import com.w3engineers.jitpackbottomnav.data.model.Message
 import com.w3engineers.jitpackbottomnav.data.model.User
 import com.w3engineers.jitpackbottomnav.databinding.FragmentChatBinding
+import com.w3engineers.jitpackbottomnav.util.Permission
 import org.workfort.base.ui.base.BaseFragment
 
 
@@ -51,6 +53,7 @@ class ChatFragment : BaseFragment() {
         binding = getViewBinding() as FragmentChatBinding
         chatAdapter = ChatAdapter(activity)
         binding.imageButtonSend.setOnClickListener(this)
+        binding.imageButtonCamera.setOnClickListener(this)
         binding.recyclerViewMessage.adapter = chatAdapter
         binding.recyclerViewMessage.layoutManager = LinearLayoutManager(activity)
         chatViewModel = getViewModel()
@@ -72,12 +75,18 @@ class ChatFragment : BaseFragment() {
     }
 
 
-    override fun onClick(p0: View?) {
+    override fun onClick(view: View?) {
         //Navigation.findNavController(view!!).navigate(R.id.open_fragment_example_second)
-        val value = binding.edittextMessageInput.text.toString().trim()
-        if (value.isEmpty()) return
-        chatViewModel.saveMessage(value, user)
-        binding.edittextMessageInput.setText("")
+       if(view!!.id == R.id.image_button_camera){
+           if (Permission.on(activity!!).request(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+               findNavController().navigate(ChatFragmentDirections.openCameraFragment())
+           }
+       }else {
+           val value = binding.edittextMessageInput.text.toString().trim()
+           if (value.isEmpty()) return
+           chatViewModel.saveMessage(value, user)
+           binding.edittextMessageInput.setText("")
+       }
 
     }
 

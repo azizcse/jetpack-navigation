@@ -50,6 +50,14 @@
                 app:exitAnim="@anim/slide_out_left"
                 app:popEnterAnim="@anim/slide_in_left"
                 app:popExitAnim="@anim/slide_out_right"/>
+
+        <action android:id="@+id/open_camera_fragment"
+                app:destination="@+id/fragment_camera"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right" />
+
         <argument
                 android:name="user"
                 app:nullable="true"
@@ -66,5 +74,11 @@
                 app:argType="string"
                 android:defaultValue="Hello"/>
     </fragment>
+
+    <fragment
+            android:id="@+id/fragment_camera"
+            android:label="Camera"
+            android:name="com.w3engineers.jitpackbottomnav.fragment.camera.CameraFragment"
+            tools:layout="@layout/fragment_camera"/>
 
 </navigation>
