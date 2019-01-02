@@ -1,48 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
 
+        <variable
+                name="message"
+                type="com.w3engineers.jitpackbottomnav.data.model.Message"/>
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_15"
-        android:layout_marginEnd="@dimen/margin_15">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_15"
+            android:layout_marginEnd="@dimen/margin_15">
 
         <TextView
-            android:id="@+id/text_view_message"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_10"
-            android:background="@drawable/bg_message_item_rounded_box"
-            android:paddingStart="@dimen/padding_10"
-            android:paddingLeft="@dimen/padding_10"
-            android:paddingTop="@dimen/padding_2"
-            android:paddingEnd="@dimen/padding_10"
-            android:paddingRight="@dimen/padding_10"
-            android:paddingBottom="@dimen/padding_2"
-            android:textColor="@color/select_photo_text_color"
-            android:textSize="@dimen/text_small_body_14"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+                android:id="@+id/text_view_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_10"
+                android:background="@drawable/bg_message_item_rounded_box"
+                android:paddingStart="@dimen/padding_10"
+                android:paddingLeft="@dimen/padding_10"
+                android:paddingTop="@dimen/padding_2"
+                android:paddingEnd="@dimen/padding_10"
+                android:paddingRight="@dimen/padding_10"
+                android:paddingBottom="@dimen/padding_2"
+                android:text="@{message.message}"
+                android:textColor="@color/select_photo_text_color"
+                android:textSize="@dimen/text_small_body_14"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
 
         <ImageView
-            android:id="@+id/image_view_delivery_status"
-            android:layout_width="@dimen/width_25"
-            android:layout_height="@dimen/height_20"
-            android:layout_marginTop="@dimen/margin_1"
-            app:layout_constraintEnd_toStartOf="@+id/text_view_date_time"
-            app:layout_constraintTop_toBottomOf="@+id/text_view_message" />
+                android:id="@+id/image_view_delivery_status"
+                android:layout_width="@dimen/width_25"
+                android:layout_height="@dimen/height_20"
+                android:layout_marginTop="@dimen/margin_1"
+                app:layout_constraintEnd_toStartOf="@+id/text_view_date_time"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_message"/>
 
         <TextView
-            android:id="@+id/text_view_date_time"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/height_20"
-            android:layout_marginTop="@dimen/padding_3"
-            android:textColor="@color/grey_400"
-            android:textSize="@dimen/text_size_10sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_view_message" />
+                android:id="@+id/text_view_date_time"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/height_20"
+                android:layout_marginTop="@dimen/padding_3"
+                android:textColor="@color/grey_400"
+                android:textSize="@dimen/text_size_10sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_message"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

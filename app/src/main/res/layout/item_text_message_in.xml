@@ -3,13 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tool="http://schemas.android.com/tools">
 
-    <!--<data>
-
+    <data>
 
         <variable
-            name="textMessage"
+            name="message"
             type="com.w3engineers.jitpackbottomnav.data.model.Message" />
-    </data>-->
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -29,9 +28,9 @@
             android:paddingEnd="@dimen/padding_10"
             android:paddingRight="@dimen/padding_10"
             android:paddingBottom="@dimen/padding_2"
-
             android:textColor="@color/select_photo_text_color"
             android:textSize="@dimen/text_small_body_14"
+            android:text="@{message.message}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

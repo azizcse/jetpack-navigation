@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+                name="user"
+                type="com.w3engineers.jitpackbottomnav.data.model.User"/>
+    </data>
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -15,13 +20,13 @@
                     android:id="@+id/user_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="User name"/>
+                    android:text="@{user.userName}"/>
 
             <TextView
                     android:id="@+id/user_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="User name"/>
+                    android:text="@{user.userId}"/>
         </LinearLayout>
 
         <Button

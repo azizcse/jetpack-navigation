@@ -19,11 +19,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
 import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 import com.w3engineers.jitpackbottomnav.R;
 import com.w3engineers.jitpackbottomnav.data.model.Message;
+import com.w3engineers.jitpackbottomnav.databinding.ItemTextMessageInBinding;
+import com.w3engineers.jitpackbottomnav.databinding.ItemTextMessageOutBinding;
 
 public class ChatAdapter extends PagedListAdapter<Message, RecyclerView.ViewHolder> {
     private final int TEXT_IN = 1;
@@ -53,11 +56,13 @@ public class ChatAdapter extends PagedListAdapter<Message, RecyclerView.ViewHold
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = null;
         if (viewType == TEXT_IN) {
-            view = LayoutInflater.from(context).inflate(R.layout.item_text_message_in, parent, false);
-            return new TextInHolder(view);
+            ItemTextMessageInBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context),
+                    R.layout.item_text_message_in, parent, false);
+            return new TextInHolder(binding);
         } else {
-            view = LayoutInflater.from(context).inflate(R.layout.item_text_message_out, parent, false);
-            return new TextOutHolder(view);
+            ItemTextMessageOutBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context),
+                    R.layout.item_text_message_out, parent, false);
+            return new TextOutHolder(binding);
         }
 
     }
@@ -78,28 +83,28 @@ public class ChatAdapter extends PagedListAdapter<Message, RecyclerView.ViewHold
 
 
     private class TextInHolder extends RecyclerView.ViewHolder {
-        TextView message;
+        ItemTextMessageInBinding binding;
 
-        public TextInHolder(@NonNull View itemView) {
-            super(itemView);
-            message = itemView.findViewById(R.id.text_view_message);
+        public TextInHolder(@NonNull ItemTextMessageInBinding itemView) {
+            super(itemView.getRoot());
+            binding = itemView;
         }
 
         void bind(Message msg) {
-            message.setText(msg.message);
+            binding.setMessage(msg);
         }
     }
 
     private class TextOutHolder extends RecyclerView.ViewHolder {
-        TextView message;
+        ItemTextMessageOutBinding binding;
 
-        public TextOutHolder(@NonNull View itemView) {
-            super(itemView);
-            message = itemView.findViewById(R.id.text_view_message);
+        public TextOutHolder(@NonNull ItemTextMessageOutBinding itemView) {
+            super(itemView.getRoot());
+            binding = itemView;
         }
 
         void bind(Message msg) {
-            message.setText(msg.message);
+            binding.setMessage(msg);
         }
     }
 

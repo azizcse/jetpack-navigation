@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.navigation.NavDirections;
 import androidx.paging.PagedListAdapter;
@@ -31,6 +32,7 @@ import com.core.kbasekit.ui.base.BaseViewHolder;
 import com.core.kbasekit.ui.base.ItemClickListener;
 import com.w3engineers.jitpackbottomnav.R;
 import com.w3engineers.jitpackbottomnav.data.model.User;
+import com.w3engineers.jitpackbottomnav.databinding.ItemUserBinding;
 import org.jetbrains.annotations.NotNull;
 
 public class UserPagedListAdapter extends PagedListAdapter<User, UserPagedListAdapter.UserViewHolder> {
@@ -46,8 +48,9 @@ public class UserPagedListAdapter extends PagedListAdapter<User, UserPagedListAd
     @NonNull
     @Override
     public UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_user, parent, false);
-        return new UserViewHolder(view);
+        //View view = LayoutInflater.from(context).inflate(R.layout.item_user, parent, false);
+        ItemUserBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.item_user, parent, false);
+        return new UserViewHolder(binding);
     }
 
     @Override
@@ -60,28 +63,24 @@ public class UserPagedListAdapter extends PagedListAdapter<User, UserPagedListAd
 
 
     public class UserViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView name, id;
-        Button deleteButton;
+        private ItemUserBinding binding;
 
-        public UserViewHolder(@NonNull View itemView) {
-            super(itemView);
-            name = itemView.findViewById(R.id.user_name);
-            id = itemView.findViewById(R.id.user_id);
-            deleteButton = itemView.findViewById(R.id.delete_button);
-            deleteButton.setOnClickListener(this);
-            name.setOnClickListener(this);
-            id.setOnClickListener(this);
+        public UserViewHolder(@NonNull ItemUserBinding itemView) {
+            super(itemView.getRoot());
+            binding = itemView;
+            binding.deleteButton.setOnClickListener(this);
+            binding.userName.setOnClickListener(this);
+            binding.userId.setOnClickListener(this);
         }
 
         void bind(User user) {
-            name.setText(user.userName);
-            id.setText(user.userId);
+            binding.setUser(user);
         }
 
         @Override
         public void onClick(View view) {
             int index = getAdapterPosition();
-            if(index < 0 || index >= getItemCount()) return;
+            if (index < 0 || index >= getItemCount()) return;
             itemClickListener.onItemClick(view, getItem(getAdapterPosition()));
         }
     }
