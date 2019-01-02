@@ -25,13 +25,9 @@
     },
     {
       "id": "2:1254387822099593149",
-      "lastPropertyId": "7:7031262056403591596",
+      "lastPropertyId": "8:8264988332312663326",
       "name": "Message",
       "properties": [
-        {
-          "id": "1:538677320948800329",
-          "name": "messageIndex"
-        },
         {
           "id": "2:5727270600997788444",
           "name": "messageId"
@@ -56,6 +52,10 @@
         {
           "id": "7:7031262056403591596",
           "name": "incoming"
+        },
+        {
+          "id": "8:8264988332312663326",
+          "name": "id"
         }
       ],
       "relations": []
@@ -70,7 +70,8 @@
   "retiredEntityUids": [],
   "retiredIndexUids": [],
   "retiredPropertyUids": [
-    689256191571174206
+    689256191571174206,
+    538677320948800329
   ],
   "retiredRelationUids": [
     6724191707256247078
