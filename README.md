@@ -3,6 +3,10 @@
 ## Tools 
 - ObjectBox NoSQL DB
 
+[Details about ObjectBox Android](https://objectbox.io/mobile)
+
+[ObjectBox doc](https://docs.objectbox.io/getting-started)
+
 - Lifecycle aware
 
 - LiveData ViewModel
