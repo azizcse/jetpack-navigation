@@ -16,6 +16,7 @@ import com.core.kbasekit.ui.base.ItemClickListener
 import com.w3engineers.jitpackbottomnav.R
 import com.w3engineers.jitpackbottomnav.data.model.User
 import com.w3engineers.jitpackbottomnav.databinding.FragmentHomeBinding
+import com.w3engineers.jitpackbottomnav.fragment.loadmore.DataLoader
 import org.workfort.base.ui.base.BaseFragment
 
 
@@ -34,10 +35,11 @@ import org.workfort.base.ui.base.BaseFragment
 
 class HomeFragment : BaseFragment(), ItemClickListener<User> {
 
+
     lateinit var binding: FragmentHomeBinding
     lateinit var homeViewModel: HomeViewModel
     lateinit var pagedAdapter: UserPagedListAdapter
-
+    lateinit var loadMore: DataLoader
     override val getLayoutId: Int
         get() = R.layout.fragment_home
     override val getMenuId: Int
@@ -46,9 +48,11 @@ class HomeFragment : BaseFragment(), ItemClickListener<User> {
     override fun startView() {
         binding = getViewBinding() as FragmentHomeBinding
         homeViewModel = getViewModel()
+        initLoadMore();
         initRecyclerView()
         loadData()
     }
+
     override fun currentFragment(): Fragment = this
 
     fun initRecyclerView() {
@@ -56,7 +60,8 @@ class HomeFragment : BaseFragment(), ItemClickListener<User> {
         binding.userRv.adapter = pagedAdapter
         binding.userRv.layoutManager = LinearLayoutManager(activity)
         binding.userRv.setHasFixedSize(true)
-       // binding.openProfilePage.setOnClickListener(this)
+        // binding.openProfilePage.setOnClickListener(this)
+        binding.userRv.addOnScrollListener(loadMore.getScrollListener())
     }
 
     fun loadData() {
@@ -100,5 +105,16 @@ class HomeFragment : BaseFragment(), ItemClickListener<User> {
 
     override fun stopView() {
 
+    }
+
+    fun initLoadMore() {
+        loadMore = object : DataLoader() {
+            override fun onLoadNextPage(pageNo: Int) {
+                Log.e("Next_page", "Next page called Activity");
+            }
+
+        }
+
+        loadMore.setTotalPageNumber(10)
     }
 }
