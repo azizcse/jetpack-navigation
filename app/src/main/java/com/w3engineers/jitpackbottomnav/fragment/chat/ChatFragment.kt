@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.text.TextUtils
 import android.util.Log
 import android.view.*
 import android.widget.*
@@ -143,9 +144,10 @@ class ChatFragment : BaseFragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(capturedImagePath != null) {
+        if (!TextUtils.isEmpty(capturedImagePath)) {
             val uri = Uri.parse(capturedImagePath)
             Toast.makeText(activity, uri.toString(), Toast.LENGTH_SHORT).show()
+            capturedImagePath = ""
         }
     }
 
