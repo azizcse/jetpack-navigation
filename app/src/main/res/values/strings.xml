@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">JetPackBottomNav</string>
+    <string name="file_provider_authority">com.w3engineers.jitpackbottomnav.file_provider</string>
 </resources>

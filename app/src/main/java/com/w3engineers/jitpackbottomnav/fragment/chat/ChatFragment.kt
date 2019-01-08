@@ -1,11 +1,16 @@
 package com.w3engineers.jitpackbottomnav.fragment.chat
 
 import android.Manifest
+import android.content.Intent
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.*
 import android.widget.*
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -18,6 +23,7 @@ import com.w3engineers.jitpackbottomnav.R
 import com.w3engineers.jitpackbottomnav.data.model.Message
 import com.w3engineers.jitpackbottomnav.data.model.User
 import com.w3engineers.jitpackbottomnav.databinding.FragmentChatBinding
+import com.w3engineers.jitpackbottomnav.util.FileUtils
 import com.w3engineers.jitpackbottomnav.util.Permission
 import org.workfort.base.ui.base.BaseFragment
 
@@ -41,7 +47,7 @@ class ChatFragment : BaseFragment() {
     lateinit var chatAdapter: ChatAdapter
     lateinit var user: User
     lateinit var chatViewModel: ChatViewModel
-
+    lateinit var capturedImagePath: String
     override val getLayoutId: Int
         get() = R.layout.fragment_chat
     override val getMenuId: Int
@@ -77,17 +83,42 @@ class ChatFragment : BaseFragment() {
 
     override fun onClick(view: View?) {
         //Navigation.findNavController(view!!).navigate(R.id.open_fragment_example_second)
-       if(view!!.id == R.id.image_button_camera){
-           if (Permission.on(activity!!).request(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-               findNavController().navigate(ChatFragmentDirections.openCameraFragment())
-           }
-       }else {
-           val value = binding.edittextMessageInput.text.toString().trim()
-           if (value.isEmpty()) return
-           chatViewModel.saveMessage(value, user)
-           binding.edittextMessageInput.setText("")
-       }
+        if (view!!.id == R.id.image_button_camera) {
+            if (Permission.on(activity!!).request(
+                    Manifest.permission.CAMERA,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                )
+            ) {
+                //findNavController().navigate(ChatFragmentDirections.openCameraFragment())
+                openCamera()
+            }
+        } else {
+            val value = binding.edittextMessageInput.text.toString().trim()
+            if (value.isEmpty()) return
+            chatViewModel.saveMessage(value, user)
+            binding.edittextMessageInput.setText("")
+        }
+    }
 
+
+    fun openCamera() {
+        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        if (cameraIntent.resolveActivity(activity!!.packageManager) != null) {
+            val file = FileUtils.createImageFile()
+            var mImageFileUri: String
+            if (file != null) {
+                capturedImagePath = FileUtils.FILE_PREFIX + file.getAbsolutePath()
+                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT_WATCH) {
+                    mImageFileUri =
+                            FileProvider.getUriForFile(activity!!, getString(R.string.file_provider_authority), file)
+                                .toString()
+                } else {
+                    mImageFileUri = Uri.parse(FileUtils.FILE_PREFIX + file.getAbsolutePath()).toString()
+                }
+                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, mImageFileUri)
+                startActivityForResult(cameraIntent, 100)
+            }
+        }
     }
 
 
@@ -98,7 +129,7 @@ class ChatFragment : BaseFragment() {
                 chatViewModel.deleteAllMessage(user)
                 return true
             }
-            R.id.profile_menu->{
+            R.id.profile_menu -> {
                 findNavController().navigate(ChatFragmentDirections.openFragmentProfile())
                 return true
             }
@@ -108,6 +139,14 @@ class ChatFragment : BaseFragment() {
 
     override fun stopView() {
 
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(capturedImagePath != null) {
+            val uri = Uri.parse(capturedImagePath)
+            Toast.makeText(activity, uri.toString(), Toast.LENGTH_SHORT).show()
+        }
     }
 
 

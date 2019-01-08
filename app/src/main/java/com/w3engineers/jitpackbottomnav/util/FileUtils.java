@@ -4,6 +4,9 @@ import android.os.Environment;
 import com.w3engineers.jitpackbottomnav.App;
 
 import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class FileUtils {
 
@@ -76,5 +79,26 @@ public class FileUtils {
 
     public static String getPackageName() {
         return App.getContext().getPackageName();
+    }
+
+    public static String TIME_STAMP_FORMAT_FOR_IMAGE = "yyyyMMdd_HHmmss";
+    public static String IMAGE_NAME_PREFIX = "IMG_";
+    public static String PHOTO_SUFFIX = ".jpg";
+    public static String FILE_PREFIX = "file:";
+
+    public static File createImageFile() throws IOException {
+        String timeStamp;
+        timeStamp = new SimpleDateFormat(TIME_STAMP_FORMAT_FOR_IMAGE).format(new Date());
+        String imageFileName = IMAGE_NAME_PREFIX + timeStamp;
+        File storageDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        try {
+            if (storageDirectory.mkdirs()) {
+                return File.createTempFile(imageFileName, PHOTO_SUFFIX, storageDirectory);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return File.createTempFile(imageFileName, PHOTO_SUFFIX, storageDirectory);
     }
 }
