@@ -1,10 +1,8 @@
 package com.w3engineers.jitpackbottomnav.fragment.history
 
-import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import com.w3engineers.jitpackbottomnav.R
 import com.w3engineers.jitpackbottomnav.data.model.User
 import com.w3engineers.jitpackbottomnav.databinding.FragmentMessageBinding
@@ -36,7 +34,7 @@ class MessageFragment : BaseFragment() {
     override val getMenuId: Int
         get() = R.menu.menu_message
 
-    override fun currentFragment(): Fragment = this
+    override fun currentFragment(): androidx.fragment.app.Fragment = this
 
     override fun startView() {
         binding = getViewBinding() as FragmentMessageBinding

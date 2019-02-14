@@ -17,6 +17,14 @@ import com.w3engineers.jitpackbottomnav.R
 import com.w3engineers.jitpackbottomnav.data.model.User
 import com.w3engineers.jitpackbottomnav.databinding.FragmentHomeBinding
 import org.workfort.base.ui.base.BaseFragment
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.ScheduledThreadPoolExecutor
+import com.w3engineers.jitpackbottomnav.fragment.history.SerialExecutorService
+
+import java.util.concurrent.ThreadFactory
+
+
+
 
 
 /*
@@ -37,6 +45,8 @@ class HomeFragment : BaseFragment(), ItemClickListener<User> {
     lateinit var binding: FragmentHomeBinding
     lateinit var homeViewModel: HomeViewModel
     lateinit var pagedAdapter: UserPagedListAdapter
+    private var outputExecutor: ExecutorService? = null
+    private var pool: ScheduledThreadPoolExecutor? = null
 
     override val getLayoutId: Int
         get() = R.layout.fragment_home
@@ -48,7 +58,9 @@ class HomeFragment : BaseFragment(), ItemClickListener<User> {
         homeViewModel = getViewModel()
         initRecyclerView()
         loadData()
+        configureOutput()
     }
+
     override fun currentFragment(): Fragment = this
 
     fun initRecyclerView() {
@@ -56,7 +68,7 @@ class HomeFragment : BaseFragment(), ItemClickListener<User> {
         binding.userRv.adapter = pagedAdapter
         binding.userRv.layoutManager = LinearLayoutManager(activity)
         binding.userRv.setHasFixedSize(true)
-       // binding.openProfilePage.setOnClickListener(this)
+        // binding.openProfilePage.setOnClickListener(this)
     }
 
     fun loadData() {
@@ -94,11 +106,35 @@ class HomeFragment : BaseFragment(), ItemClickListener<User> {
                 homeViewModel.saveUser("Click to chat " + System.currentTimeMillis())
                 return true
             }
+
+            R.id.add_menu_check -> {
+                for ( i in 1..1000){
+                    outputExecutor!!.execute(Runnable {
+                       System.out.println(" Hello exceute ="+System.currentTimeMillis())
+                    })
+                }
+                return true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
 
     override fun stopView() {
+
+    }
+
+
+    private fun configureOutput() {
+       pool = ScheduledThreadPoolExecutor(1, object : ThreadFactory{
+           override fun newThread(r: Runnable?): Thread {
+               val thread = Thread(r)
+               thread.name = "NsdLink " + this.hashCode() + " Output"
+               thread.isDaemon = true
+               return thread
+           }
+
+       })
+        outputExecutor = SerialExecutorService(pool)
 
     }
 }
