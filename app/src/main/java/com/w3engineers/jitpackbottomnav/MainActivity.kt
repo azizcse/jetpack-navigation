@@ -16,10 +16,16 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.w3engineers.jitpackbottomnav.data.model.User
+import com.w3engineers.jitpackbottomnav.databinding.ActivityNavdrawerBinding
 import com.w3engineers.jitpackbottomnav.fragment.chat.ChatViewModel
 import com.w3engineers.jitpackbottomnav.fragment.home.HomeFragment
 import com.w3engineers.jitpackbottomnav.fragment.home.HomeFragmentDirections
@@ -31,13 +37,15 @@ class MainActivity : AppCompatActivity(), NavController.OnNavigatedListener {
     private lateinit var navigation: BottomNavigationView
     private lateinit var currentFragment : Fragment
     private lateinit var mainViewModel: MainViewModel
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var appBarConfiguration: AppBarConfiguration
 
     fun currentFragment(fragment: Fragment){
         this.currentFragment = fragment
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        val binding: ActivityNavdrawerBinding = DataBindingUtil.setContentView(this, R.layout.activity_navdrawer)
 
         navigation = findViewById(R.id.bottom_nav) as BottomNavigationView
 
@@ -54,6 +62,10 @@ class MainActivity : AppCompatActivity(), NavController.OnNavigatedListener {
         mainViewModel = getViewModel()
 
         subscribeViewMOdel()
+        setSupportActionBar(binding.toolbar)
+        drawerLayout = binding.drawerLayout
+        appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
+        setupActionBarWithNavController(navController, appBarConfiguration)
 
         /**
          * This will select the given id fragment
@@ -83,13 +95,14 @@ class MainActivity : AppCompatActivity(), NavController.OnNavigatedListener {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp() || super.onSupportNavigateUp()
+        // navController.navigateUp() || super.onSupportNavigateUp()
+        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
     override fun onNavigated(controller: NavController, destination: NavDestination) {
         val title = destination.label
         Log.e("Item_list", "destination " + title)
-        supportActionBar!!.title = title
+        /*supportActionBar!!.title = title
         if (title!!.equals("Chat") || title!!.equals("Profile image")) {
             toggleBottomView(false)
             supportActionBar!!.setDisplayHomeAsUpEnabled(true)
@@ -102,7 +115,7 @@ class MainActivity : AppCompatActivity(), NavController.OnNavigatedListener {
             supportActionBar!!.setDisplayHomeAsUpEnabled(false)
             toggleBottomView(true)
         }
-        supportActionBar!!.show()
+        supportActionBar!!.show()*/
 
     }
 

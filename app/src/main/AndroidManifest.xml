@@ -30,7 +30,8 @@
         </activity>
 
         <activity android:name=".activity.ProfileActivity"/>
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+                  android:theme="@style/Theme.AppCompat.NoActionBar">
             <nav-graph android:value="@navigation/bottom_nav_graph"/>
         </activity>
 
