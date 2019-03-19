@@ -10,6 +10,10 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+
+/**
+ *
+ */
 public class SerialExecutorService extends AbstractExecutorService {
     private static final int RUNNING = 0;
     private static final int SHUTDOWN = 1;

@@ -108,9 +108,10 @@ class HomeFragment : BaseFragment(), ItemClickListener<User> {
             }
 
             R.id.add_menu_check -> {
-                for ( i in 1..1000){
+                for ( i in 1..100){
                     outputExecutor!!.execute(Runnable {
-                       System.out.println(" Hello exceute ="+System.currentTimeMillis())
+                        Thread.sleep(100)
+                       System.out.println(" Hello exceute ="+i)
                     })
                 }
                 return true
